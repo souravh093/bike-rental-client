@@ -17,20 +17,37 @@ import { signupSchema } from "@/validation/authValidation";
 import { z } from "zod";
 import { SignUpFormFieldProps } from "@/types/auth";
 import { Link } from "react-router-dom";
+import { useSignUpMutation } from "@/redux/features/auth/authApi";
 
 const Register = () => {
+  const [signUp] = useSignUpMutation();
+
   const form = useForm<z.infer<typeof signupSchema>>({
     resolver: zodResolver(signupSchema),
     defaultValues: {
       name: "",
       email: "",
       password: "",
+      phone: "",
       address: "",
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const userData = {
+      ...data,
+      role: "user",
+    };
+
+    try {
+      const res = await signUp(userData).unwrap();
+
+      if(res.success) {
+        
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
