@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { LoadingSkeleton } from "@/components/shared/LoadingSkeleton";
-import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -31,6 +30,7 @@ import { TQueryParam } from "@/types/global";
 import { Input } from "@/components/ui/input";
 import { EditBikeModal } from "@/components/modal/EditBikeModal";
 import ConfirmDeleteModal from "@/components/modal/ConfirmDeleteModal";
+import { CreateBikeModal } from "@/components/modal/CreateBikeModal";
 
 const BikeManagement = () => {
   const [params, setParams] = useState<TQueryParam[]>([]);
@@ -105,7 +105,7 @@ const BikeManagement = () => {
             placeholder="Search bike..."
             className="w-96"
           />
-          <Button>Create Bike</Button>
+          <CreateBikeModal />
         </div>
       </div>
       <Table>

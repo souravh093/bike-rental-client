@@ -9,31 +9,26 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
-
-import { Edit } from "lucide-react";
+import CreateBikeForm from "../form/CreateBikeForm";
 
 export function CreateBikeModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">
-          <Edit className="w-4 h-4" />
-        </Button>
+        <Button>Create Bike</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-5xl">
         <DialogHeader>
           <DialogTitle>Edit Bike Information</DialogTitle>
           <DialogDescription>Update the bike details below.</DialogDescription>
         </DialogHeader>
-        <>hello</>
+        <CreateBikeForm />
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
             <Button type="button" variant="secondary">
               Close
             </Button>
           </DialogClose>
-          <Button type="submit">Save Changes</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
