@@ -3,6 +3,7 @@ import DashboardLayout from "@/layout/DashboardLayout";
 import RootLayout from "@/layout/RootLayout";
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
+import BikeManagement from "@/pages/Dashboard/Admin/BikeManagement/BikeManagement";
 import Profile from "@/pages/Dashboard/Admin/Porfile/Profile";
 import Error from "@/pages/Error/Error";
 import Home from "@/pages/Home/Home";
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
         path: "profile",
         element: <Profile />,
       },
+      {
+        path: "admin-bike-management",
+        element: <BikeManagement />
+      }
     ],
   },
 ]);

@@ -1,4 +1,5 @@
 import {
+  Bike,
   CircleUser,
   Home,
   LineChart,
@@ -65,11 +66,11 @@ const DashboardLayout = () => {
                 </Badge>
               </Link>
               <Link
-                to={"/"}
+                to={"/dashboard/admin-bike-management"}
                 className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
               >
-                <Package className="h-4 w-4" />
-                Products{" "}
+                <Bike className="h-4 w-4" />
+                Bike Management
               </Link>
               <Link
                 to={"/"}
