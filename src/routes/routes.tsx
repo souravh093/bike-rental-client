@@ -3,6 +3,7 @@ import DashboardLayout from "@/layout/DashboardLayout";
 import RootLayout from "@/layout/RootLayout";
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
+import Profile from "@/pages/Dashboard/Admin/Porfile/Profile";
 import Error from "@/pages/Error/Error";
 import Home from "@/pages/Home/Home";
 import PrivateRoute from "@/private/PrivateRoute";
@@ -43,7 +44,12 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     errorElement: <Error />,
-    children: [],
+    children: [
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+    ],
   },
 ]);
 

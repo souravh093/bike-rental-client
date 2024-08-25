@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { loginSchema, signupSchema } from "@/validation/authValidation";
+import { loginSchema, signupSchema, updateSignupSchema } from "@/validation/authValidation";
 import { Control, FieldPath } from "react-hook-form";
 import { z } from "zod";
 
@@ -25,11 +25,11 @@ export interface AuthFormFieldProps {
 }
 
 export interface SignUpFormFieldProps {
-  name: FieldPath<z.infer<typeof signupSchema>>;
+  name: FieldPath<z.infer<typeof updateSignupSchema>>;
   label: string;
   placeholder: string;
   description?: string;
   inputType?: string;
   required?: boolean;
-  formControl: Control<z.infer<typeof signupSchema>, any>;
+  formControl: Control<z.infer<typeof updateSignupSchema>, any>;
 }

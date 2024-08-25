@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { AuthFormFieldProps } from "@/types/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "@/redux/features/auth/authApi";
 import { useAppDispatch } from "@/redux/hooks";
 import { toast } from "@/components/ui/use-toast";
@@ -23,6 +23,7 @@ import { verifyToken } from "@/utils/verifyToken";
 import { setUser } from "@/redux/features/auth/authSlice";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [login, { isLoading }] = useLoginMutation();
   const dispatch = useAppDispatch();
   const form = useForm({
@@ -36,6 +37,7 @@ const Login = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const res = await login(data).unwrap();
     console.log(res);
+
     const user = verifyToken(res.token);
     console.log(user);
     try {
@@ -47,6 +49,7 @@ const Login = () => {
       );
 
       toast({ title: res.message });
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
       toast({ title: "Something went wrong" }); // TODO
@@ -83,7 +86,7 @@ const Login = () => {
               inputType="password"
               formControl={form.control}
             />
-            <Button type="submit">Login</Button>
+            <Button type="submit">{isLoading ? "Logging..." : "Login"}</Button>
           </form>
         </Form>
 
@@ -93,7 +96,7 @@ const Login = () => {
             className="text-green-500 hover:font-bold"
             to={"/auth/register"}
           >
-            {isLoading ? "Signup..." : "Signup now"}
+            Signup now
           </Link>
         </h3>
       </div>
