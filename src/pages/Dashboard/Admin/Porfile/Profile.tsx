@@ -17,14 +17,14 @@ import {
   useGetProfileQuery,
   useUpdateProfileMutation,
 } from "@/redux/features/user/userApi";
-import { SignUpFormFieldProps } from "@/types/auth";
+import { UpdateUserProfile } from "@/types/auth";
 import { updateSignupSchema } from "@/validation/authValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
 const Profile = () => {
-  const [updateUser, { isLoading: updateLoading,  }] = useUpdateProfileMutation();
+  const [updateUser, { isLoading: updateLoading }] = useUpdateProfileMutation();
   const {
     data: userData,
     isLoading,
@@ -61,7 +61,7 @@ const Profile = () => {
     try {
       const res = await updateUser(userData).unwrap();
 
-      console.log(res)
+      console.log(res);
 
       if (res.success) {
         toast({
@@ -143,7 +143,7 @@ const Profile = () => {
   );
 };
 
-const SignupFormField: React.FC<SignUpFormFieldProps> = ({
+const SignupFormField: React.FC<UpdateUserProfile> = ({
   name,
   label,
   placeholder,

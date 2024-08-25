@@ -24,7 +24,7 @@ export interface AuthFormFieldProps {
   formControl: Control<z.infer<typeof loginSchema>, any>;
 }
 
-export interface SignUpFormFieldProps {
+export interface UpdateUserProfile {
   name: FieldPath<z.infer<typeof updateSignupSchema>>;
   label: string;
   placeholder: string;
@@ -32,4 +32,14 @@ export interface SignUpFormFieldProps {
   inputType?: string;
   required?: boolean;
   formControl: Control<z.infer<typeof updateSignupSchema>, any>;
+}
+
+export interface SignUpFormFieldProps {
+  name: FieldPath<z.infer<typeof signupSchema>>;
+  label: string;
+  placeholder: string;
+  description?: string;
+  inputType?: string;
+  required?: boolean;
+  formControl: Control<z.infer<typeof signupSchema>, any>;
 }

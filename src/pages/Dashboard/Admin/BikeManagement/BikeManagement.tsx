@@ -27,9 +27,10 @@ import {
 
 import { useGetBikesQuery } from "@/redux/features/bike/bikeApi";
 import { TBike } from "@/types/bike";
-import { Delete, Edit } from "lucide-react";
 import { TQueryParam } from "@/types/global";
 import { Input } from "@/components/ui/input";
+import { EditBikeModal } from "@/components/modal/EditBikeModal";
+import ConfirmDeleteModal from "@/components/modal/ConfirmDeleteModal";
 
 const BikeManagement = () => {
   const [params, setParams] = useState<TQueryParam[]>([]);
@@ -40,8 +41,6 @@ const BikeManagement = () => {
     isFetching,
   } = useGetBikesQuery([...params, { name: "page", value: currentPage }]);
 
-  console.log("params", params);
-  console.log("bikeData", bikeData);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -99,12 +98,15 @@ const BikeManagement = () => {
           </Select>
         </div>
 
-        <Input
-          onChange={(e) => handleSearch(e.target.value)}
-          type="text"
-          placeholder="Search bike..."
-          className="w-96"
-        />
+        <div className="flex items-center gap-5">
+          <Input
+            onChange={(e) => handleSearch(e.target.value)}
+            type="text"
+            placeholder="Search bike..."
+            className="w-96"
+          />
+          <Button>Create Bike</Button>
+        </div>
       </div>
       <Table>
         <TableHeader>
@@ -127,7 +129,16 @@ const BikeManagement = () => {
           ) : (
             bikeData?.data?.map(
               (
-                { name, brand, cc, model, pricePerHour, year }: TBike,
+                {
+                  name,
+                  brand,
+                  cc,
+                  model,
+                  pricePerHour,
+                  year,
+                  _id,
+                  description,
+                }: TBike,
                 _index: number
               ) => (
                 <TableRow key={_index}>
@@ -139,12 +150,19 @@ const BikeManagement = () => {
                   <TableCell>{year}</TableCell>
                   <TableCell>{brand}</TableCell>
                   <TableCell className="flex items-center gap-2">
-                    <Button variant="outline">
-                      <Edit className="w-4 h-4" />
-                    </Button>
-                    <Button variant="destructive">
-                      <Delete className="w-4 h-4" />
-                    </Button>
+                    <EditBikeModal
+                      data={{
+                        name,
+                        brand,
+                        cc,
+                        model,
+                        pricePerHour,
+                        year,
+                        _id,
+                        description,
+                      }}
+                    />
+                    <ConfirmDeleteModal id={_id} />
                   </TableCell>
                 </TableRow>
               )

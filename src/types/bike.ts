@@ -1,4 +1,5 @@
 export type TBike = {
+    _id?: string;
     name: string;
     description?: string;
     pricePerHour: number;
@@ -7,6 +8,5 @@ export type TBike = {
     year: number;
     model: string;
     brand: string;
-    createdAt?: string;
   };
   
