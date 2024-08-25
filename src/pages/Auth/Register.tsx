@@ -16,11 +16,13 @@ import { Input } from "@/components/ui/input";
 import { signupSchema } from "@/validation/authValidation";
 import { z } from "zod";
 import { SignUpFormFieldProps } from "@/types/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSignUpMutation } from "@/redux/features/auth/authApi";
+import { toast } from "@/components/ui/use-toast";
 
 const Register = () => {
-  const [signUp] = useSignUpMutation();
+  const navigate = useNavigate();
+  const [signUp, { isLoading }] = useSignUpMutation();
 
   const form = useForm<z.infer<typeof signupSchema>>({
     resolver: zodResolver(signupSchema),
@@ -42,11 +44,19 @@ const Register = () => {
     try {
       const res = await signUp(userData).unwrap();
 
-      if(res.success) {
-        
+      if (res.success) {
+        toast({
+          variant: "default",
+          title: res.message,
+        });
+
+        navigate("/auth");
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: error?.data?.message,
+      });
     }
   };
 
@@ -101,7 +111,7 @@ const Register = () => {
               inputType="text"
               formControl={form.control}
             />
-            <Button type="submit">Signup</Button>
+            <Button type="submit">{isLoading ? "Logging..." : "Login"}</Button>
           </form>
         </Form>
 

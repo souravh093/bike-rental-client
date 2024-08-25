@@ -16,8 +16,15 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { AuthFormFieldProps } from "@/types/auth";
 import { Link } from "react-router-dom";
+import { useLoginMutation } from "@/redux/features/auth/authApi";
+import { useAppDispatch } from "@/redux/hooks";
+import { toast } from "@/components/ui/use-toast";
+import { verifyToken } from "@/utils/verifyToken";
+import { setUser } from "@/redux/features/auth/authSlice";
 
 const Login = () => {
+  const [login, { isLoading }] = useLoginMutation();
+  const dispatch = useAppDispatch();
   const form = useForm({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -26,8 +33,24 @@ const Login = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const res = await login(data).unwrap();
+    console.log(res);
+    const user = verifyToken(res.token);
+    console.log(user);
+    try {
+      dispatch(
+        setUser({
+          user,
+          token: res.token,
+        })
+      );
+
+      toast({ title: res.message });
+    } catch (error) {
+      console.log(error);
+      toast({ title: "Something went wrong" }); // TODO
+    }
   };
 
   return (
@@ -60,14 +83,17 @@ const Login = () => {
               inputType="password"
               formControl={form.control}
             />
-            <Button type="submit">Signup</Button>
+            <Button type="submit">Login</Button>
           </form>
         </Form>
 
         <h3 className="font-semibold">
           If you don't have account:{" "}
-          <Link className="text-green-500 hover:font-bold" to={"/auth/register"}>
-            Signup now
+          <Link
+            className="text-green-500 hover:font-bold"
+            to={"/auth/register"}
+          >
+            {isLoading ? "Signup..." : "Signup now"}
           </Link>
         </h3>
       </div>
