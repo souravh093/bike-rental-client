@@ -5,6 +5,7 @@ import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
 import Error from "@/pages/Error/Error";
 import Home from "@/pages/Home/Home";
+import PrivateRoute from "@/private/PrivateRoute";
 import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -36,12 +37,14 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     errorElement: <Error />,
-    children: [
-        
-    ]
-  }
+    children: [],
+  },
 ]);
 
 export default router;
