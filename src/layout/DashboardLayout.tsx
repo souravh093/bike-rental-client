@@ -27,6 +27,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { logout } from "@/redux/features/auth/authSlice";
 
 const DashboardLayout = () => {
+  
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
@@ -73,11 +74,11 @@ const DashboardLayout = () => {
                 Bike Management
               </Link>
               <Link
-                to={"/"}
+                to={"/dashboard/users"}
                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               >
                 <Users className="h-4 w-4" />
-                Customers
+                Users
               </Link>
               <Link
                 to={"/"}

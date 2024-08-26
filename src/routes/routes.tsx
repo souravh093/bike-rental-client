@@ -5,6 +5,7 @@ import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
 import BikeManagement from "@/pages/Dashboard/Admin/BikeManagement/BikeManagement";
 import Profile from "@/pages/Dashboard/Admin/Porfile/Profile";
+import Users from "@/pages/Dashboard/Admin/Users/Users";
 import Error from "@/pages/Error/Error";
 import Home from "@/pages/Home/Home";
 import PrivateRoute from "@/private/PrivateRoute";
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "admin-bike-management",
         element: <BikeManagement />
+      },
+      {
+        path: "users",
+        element: <Users />
       }
     ],
   },

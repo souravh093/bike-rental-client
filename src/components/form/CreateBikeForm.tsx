@@ -70,7 +70,6 @@ const CreateBikeForm: React.FC<CreateBikeFormProps> = ({ setOpen }) => {
       image: imageUrl,
     };
 
-    console.log(bikeData);
 
     try {
       const res = await createBike(bikeData).unwrap();
