@@ -6,6 +6,8 @@ import Register from "@/pages/Auth/Register";
 import BikeManagement from "@/pages/Dashboard/Admin/BikeManagement/BikeManagement";
 import Profile from "@/pages/Dashboard/Admin/Porfile/Profile";
 import Users from "@/pages/Dashboard/Admin/Users/Users";
+import BikeDetails from "@/pages/Dashboard/Client/BikeDetails/BikeDetails";
+import ClientBikeManagement from "@/pages/Dashboard/Client/ClientBikeManagement/ClientBikeManagement";
 import Error from "@/pages/Error/Error";
 import Home from "@/pages/Home/Home";
 import PrivateRoute from "@/private/PrivateRoute";
@@ -47,6 +49,7 @@ const router = createBrowserRouter([
     ),
     errorElement: <Error />,
     children: [
+      // Admin Dashboard
       {
         path: "profile",
         element: <Profile />,
@@ -58,6 +61,16 @@ const router = createBrowserRouter([
       {
         path: "users",
         element: <Users />
+      },
+
+      // Client Dashboard
+      {
+        path: "client-bike-management",
+        element: <ClientBikeManagement />
+      },
+      {
+        path: "bike-details/:id",
+        element: <BikeDetails />
       }
     ],
   },

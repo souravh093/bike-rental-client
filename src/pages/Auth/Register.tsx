@@ -111,7 +111,7 @@ const Register = () => {
               inputType="text"
               formControl={form.control}
             />
-            <Button type="submit">{isLoading ? "Logging..." : "Login"}</Button>
+            <Button type="submit">{isLoading ? "Signing..." : "Singup"}</Button>
           </form>
         </Form>
 

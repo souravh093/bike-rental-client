@@ -45,7 +45,7 @@ const Users = () => {
     isLoading,
     isFetching,
   } = useGetAllUsersQuery([...params, { name: "page", value: currentPage }]);
-  console.log(allUsers);
+
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
