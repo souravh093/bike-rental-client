@@ -41,7 +41,6 @@ const BikeManagement = () => {
     isFetching,
   } = useGetBikesQuery([...params, { name: "page", value: currentPage }]);
 
-
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
@@ -137,13 +136,23 @@ const BikeManagement = () => {
                   pricePerHour,
                   year,
                   _id,
+                  image,
                   description,
                 }: TBike,
                 _index: number
               ) => (
                 <TableRow key={_index}>
                   <TableCell className="font-medium">{_index + 1}</TableCell>
-                  <TableCell className="font-medium">{name}</TableCell>
+                  <TableCell className="font-medium">
+                    <span className="flex items-center gap-2">
+                      <img
+                        src={image}
+                        alt={`bike image`}
+                        className="w-12 h-12 object-contain rounded-2xl border-2"
+                      />
+                      <span>{name}</span>
+                    </span>
+                  </TableCell>
                   <TableCell>{pricePerHour} $</TableCell>
                   <TableCell>{cc}</TableCell>
                   <TableCell>{model}</TableCell>

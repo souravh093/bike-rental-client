@@ -5,6 +5,7 @@ export type TBike = {
     pricePerHour: number;
     isAvailable?: boolean;
     cc: number;
+    image?: string;
     year: number;
     model: string;
     brand: string;

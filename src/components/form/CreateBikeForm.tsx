@@ -1,25 +1,94 @@
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import {
+  Controller,
+  FieldValues,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchema } from "@/validation/bikeValidation";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useCreateBikeMutation } from "@/redux/features/bike/bikeApi";
+import { toast } from "../ui/use-toast";
 
-const CreateBikeForm = () => {
+const apiKey = "800d9ccab79ca9e964c7b1edac462750";
+
+interface CreateBikeFormProps {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const CreateBikeForm: React.FC<CreateBikeFormProps> = ({ setOpen }) => {
+  const [createBike, { isLoading }] = useCreateBikeMutation();
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
-
-    // Access the image file
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const imageFile = data.image?.[0];
-    console.log(imageFile);
+
+    const uploadImageToImgbb = async (
+      imageFile: File
+    ): Promise<string | null | undefined> => {
+      const formData = new FormData();
+      formData.append("image", imageFile);
+      formData.append("key", apiKey || "");
+
+      try {
+        const res = await fetch("https://api.imgbb.com/1/upload", {
+          method: "POST",
+          body: formData,
+        });
+        const result = await res.json();
+
+        if (result.success) {
+          return result.data.url;
+        }
+      } catch (error) {
+        console.log("Error uploading image", error);
+        return null;
+      }
+    };
+    const imageUrl = await uploadImageToImgbb(imageFile);
+
+    const bikeData = {
+      ...data,
+      cc: Number(data.cc),
+      image: imageUrl,
+    };
+
+    console.log(bikeData);
+
+    try {
+      const res = await createBike(bikeData).unwrap();
+
+      if (res.success) {
+        toast({
+          variant: "default",
+          title: res.message,
+        });
+      }
+
+      setOpen(false);
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: error?.data?.message,
+      });
+    }
   };
 
   return (
@@ -46,11 +115,28 @@ const CreateBikeForm = () => {
         </div>
 
         <div>
-          <Label htmlFor="cc">CC</Label>
-          <Input
-            id="cc"
-            type="number"
-            {...register("cc", { valueAsNumber: true })}
+          <Controller
+            name="cc"
+            control={control}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value || ""}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a CC" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="50">50</SelectItem>
+                  <SelectItem value="100">100</SelectItem>
+                  <SelectItem value="110">110</SelectItem>
+                  <SelectItem value="125">125</SelectItem>
+                  <SelectItem value="150">150</SelectItem>
+                  <SelectItem value="160">160</SelectItem>
+                  <SelectItem value="180">180</SelectItem>
+                  <SelectItem value="200">200</SelectItem>
+                  <SelectItem value="250">250</SelectItem>
+                  <SelectItem value="300">300</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
           />
           {errors.cc && (
             <p className="text-red-500">{errors.cc.message as string}</p>
@@ -58,16 +144,38 @@ const CreateBikeForm = () => {
         </div>
 
         <div>
-          <Label htmlFor="brand">Brand</Label>
-          <Input id="brand" {...register("brand")} />
+          <Controller
+            name="brand"
+            control={control}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value || ""}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a brand" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="honda">Honda</SelectItem>
+                  <SelectItem value="yamaha">Yamaha</SelectItem>
+                  <SelectItem value="suzuki">Suzuki</SelectItem>
+                  <SelectItem value="bajaj">Bajaj</SelectItem>
+                  <SelectItem value="hero">Hero</SelectItem>
+                  <SelectItem value="tvs">TVS</SelectItem>
+                  <SelectItem value="kawasaki">Kawasaki</SelectItem>
+                  <SelectItem value="royal-enfield">Royal Enfield</SelectItem>
+                  <SelectItem value="keeway">Keeway</SelectItem>
+                  <SelectItem value="lifan">Lifan</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
+          />
+
           {errors.brand && (
             <p className="text-red-500">{errors.brand.message as string}</p>
           )}
         </div>
 
         <div>
-          <Label htmlFor="modal">Modal</Label>
-          <Input id="modal" {...register("modal")} />
+          <Label htmlFor="model">Model</Label>
+          <Input id="model" {...register("model")} />
           {errors.modal && (
             <p className="text-red-500">{errors.modal.message as string}</p>
           )}
@@ -105,9 +213,9 @@ const CreateBikeForm = () => {
           )}
         </div>
       </div>
-      <div className="flex items-center justify-center">
-        <Button type="submit" className="w-full">
-          Submit
+      <div className="flex items-center justify-start">
+        <Button type="submit">
+          {isLoading ? "Creating Bike..." : "Create Bike"}
         </Button>
       </div>
     </form>

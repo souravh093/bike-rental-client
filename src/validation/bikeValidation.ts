@@ -3,9 +3,9 @@ import { z } from "zod";
 export const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
   year: z.number({ required_error: "Year is required" }),
-  cc: z.number().min(1, "CC must be greater than 0"),
+  cc: z.string().min(1, "CC must be greater than 0"),
   brand: z.string().min(1, "Brand is required"),
-  modal: z.string().min(1, "Modal is required"),
+  model: z.string().min(1, "Model is required"),
   description: z.string().optional(),
   pricePerHour: z.number().min(1, "Price per hour must be greater than 0"),
   image: z
