@@ -16,6 +16,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
 import AdminSidebar from "@/components/Sidebar/AdminSidebar";
 import ClientSidebar from "@/components/Sidebar/ClientSidebar";
+import { ModeToggle } from "@/components/Theme/ModeToggle";
 
 const DashboardLayout = () => {
   const currentUser = useAppSelector(selectCurrentUser);
@@ -72,6 +73,7 @@ const DashboardLayout = () => {
             </SheetContent>
           </Sheet>
           <div className="w-full flex-1"></div>
+          <ModeToggle />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">

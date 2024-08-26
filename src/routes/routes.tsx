@@ -1,6 +1,7 @@
 import AuthLayout from "@/layout/AuthLayout";
 import DashboardLayout from "@/layout/DashboardLayout";
 import RootLayout from "@/layout/RootLayout";
+import AboutUs from "@/pages/About/About";
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
 import BikeManagement from "@/pages/Dashboard/Admin/BikeManagement/BikeManagement";
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+      {
+        path: "/about",
+        element: <AboutUs />
+      }
     ],
   },
   {
