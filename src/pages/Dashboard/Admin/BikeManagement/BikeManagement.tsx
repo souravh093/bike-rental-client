@@ -48,8 +48,8 @@ const BikeManagement = () => {
   const handleValueChangeModal = (value: string) => {
     setParams((prevParams) =>
       prevParams
-        .filter((param) => param.name !== "model")
-        .concat({ name: "model", value })
+        .filter((param) => param.name !== "cc")
+        .concat({ name: "cc", value })
     );
   };
   const handleValueChangeBrand = (value: string) => {
@@ -76,12 +76,19 @@ const BikeManagement = () => {
         <div className="flex items-center gap-5">
           <Select onValueChange={handleValueChangeModal}>
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Modal" />
+              <SelectValue placeholder="CC" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="X1">X1</SelectItem>
-              <SelectItem value="X2">X2</SelectItem>
-              <SelectItem value="X3">X3</SelectItem>
+              <SelectItem value="50">50</SelectItem>
+              <SelectItem value="100">100</SelectItem>
+              <SelectItem value="110">110</SelectItem>
+              <SelectItem value="125">125</SelectItem>
+              <SelectItem value="150">150</SelectItem>
+              <SelectItem value="160">160</SelectItem>
+              <SelectItem value="180">180</SelectItem>
+              <SelectItem value="200">200</SelectItem>
+              <SelectItem value="250">250</SelectItem>
+              <SelectItem value="300">300</SelectItem>
             </SelectContent>
           </Select>
 
@@ -90,9 +97,16 @@ const BikeManagement = () => {
               <SelectValue placeholder="Brand" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="Yamaha">Yamaha</SelectItem>
-              <SelectItem value="Suzuki">Suzuki</SelectItem>
-              <SelectItem value="Honda">Honda</SelectItem>
+              <SelectItem value="honda">Honda</SelectItem>
+              <SelectItem value="yamaha">Yamaha</SelectItem>
+              <SelectItem value="suzuki">Suzuki</SelectItem>
+              <SelectItem value="bajaj">Bajaj</SelectItem>
+              <SelectItem value="hero">Hero</SelectItem>
+              <SelectItem value="tvs">TVS</SelectItem>
+              <SelectItem value="kawasaki">Kawasaki</SelectItem>
+              <SelectItem value="royal-enfield">Royal Enfield</SelectItem>
+              <SelectItem value="keeway">Keeway</SelectItem>
+              <SelectItem value="lifan">Lifan</SelectItem>
             </SelectContent>
           </Select>
         </div>
