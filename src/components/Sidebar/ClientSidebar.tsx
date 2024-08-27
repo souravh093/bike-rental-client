@@ -1,4 +1,10 @@
-import { Bike, Home, LineChart, ShoppingCart, Users } from "lucide-react";
+import {
+  Bike,
+  Home,
+  LineChart,
+  Settings,
+  ShoppingCart,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 
 const ClientSidebar = () => {
@@ -26,11 +32,11 @@ const ClientSidebar = () => {
         Bike Management
       </Link>
       <Link
-        to={"/dashboard/users"}
+        to={"/dashboard/my-rental"}
         className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
       >
-        <Users className="h-4 w-4" />
-        Users
+        <Settings className="h-4 w-4" />
+        My Rental
       </Link>
       <Link
         to={"/"}

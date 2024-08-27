@@ -23,10 +23,10 @@ const CreateBookingForm: React.FC<CreateBikeFormProps> = ({ setOpen, id }) => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log(data.startTime);
     const startTime = formatDate(data.startTime);
-    console.log(startTime)
+    console.log(startTime);
 
     navigate(`/dashboard/payment-booking`, {
-      state: { id: id, startTime: startTime },
+      state: { id: id, startTime: startTime, paidStatus: "initial-paid" },
     });
 
     setOpen(false);

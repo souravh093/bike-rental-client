@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { LoadingSkeleton } from "@/components/shared/LoadingSkeleton";
@@ -36,7 +37,7 @@ import { toast } from "@/components/ui/use-toast";
 import ConfirmDeleteUserModal from "@/components/modal/ConfirmDeleteUserModal";
 
 const Users = () => {
-  const [updateRole, { isLoading: updateRoleLoading }] =
+  const [updateRole] =
     useUpdateRoleMutation();
   const [params, setParams] = useState<TQueryParam[]>([]);
   const [currentPage, setCurrentPage] = useState(1);

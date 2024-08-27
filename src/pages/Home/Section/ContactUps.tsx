@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -45,6 +44,7 @@ export default function ContactUs() {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values)
     setIsSubmitting(true)
     // Simulate API call
     setTimeout(() => {
@@ -56,6 +56,7 @@ export default function ContactUs() {
       form.reset()
     }, 2000)
   }
+
 
   return (
     <section className="py-20 px-4 bg-gradient-to-br from-background to-muted">

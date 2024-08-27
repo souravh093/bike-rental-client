@@ -8,6 +8,7 @@ import BikeManagement from "@/pages/Dashboard/Admin/BikeManagement/BikeManagemen
 import Profile from "@/pages/Dashboard/Admin/Porfile/Profile";
 import Users from "@/pages/Dashboard/Admin/Users/Users";
 import BikeDetails from "@/pages/Dashboard/Client/BikeDetails/BikeDetails";
+import Booking from "@/pages/Dashboard/Client/Booking/Booking";
 import ClientBikeManagement from "@/pages/Dashboard/Client/ClientBikeManagement/ClientBikeManagement";
 import PaymentBooking from "@/pages/Dashboard/Client/PaymentBooking/PaymentBooking";
 import Error from "@/pages/Error/Error";
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
       {
         path: "payment-booking",
         element: <PaymentBooking />
+      },
+      {
+        path: "my-rental",
+        element: <Booking />
       }
     ],
   },

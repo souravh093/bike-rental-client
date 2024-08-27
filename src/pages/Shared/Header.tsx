@@ -6,14 +6,12 @@ import { ModeToggle } from "@/components/Theme/ModeToggle";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   logout,
-  selectCurrentUser,
   useCurrentToken,
 } from "@/redux/features/auth/authSlice";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -22,10 +20,7 @@ import { CircleUser } from "lucide-react";
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const user = useAppSelector(selectCurrentUser);
   const token = useAppSelector(useCurrentToken);
-
-  const role = user ? user.role : null;
 
   const handleLogout = () => {
     dispatch(logout());
