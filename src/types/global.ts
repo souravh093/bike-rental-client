@@ -10,6 +10,7 @@ interface BikeId {
 }
 
 export interface TBooking {
+  _id: string;
   bikeId: BikeId;
   startTime: Date;
   returnTime: Date;

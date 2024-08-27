@@ -27,9 +27,15 @@ export default function Booking() {
       value: "full-paid",
     });
 
-  console.log(fullPaidData, initialPaidData);
-  const handlePayment = (rentalId: string) => {
-    navigate(`/dashboard/payment-booking`, { state: { id: rentalId } });
+  const handlePayment = (
+    bikeId: string,
+    totalPrice: number,
+    bookingId: string
+  ) => {
+    console.log(bookingId);
+    navigate(`/dashboard/payment-booking`, {
+      state: { id: bikeId, totalPrice, bookingId: bookingId },
+    });
   };
 
   return (
@@ -63,6 +69,7 @@ export default function Booking() {
                 initialPaidData?.data?.map(
                   (
                     {
+                      _id: bookingId,
                       bikeId: { image, name, _id },
                       startTime,
                       returnTime,
@@ -100,7 +107,9 @@ export default function Booking() {
                       <TableCell className="flex items-center gap-2">
                         <Button
                           className="bg-green-500 px-8"
-                          onClick={() => handlePayment(_id)}
+                          onClick={() =>
+                            handlePayment(_id, totalCost, bookingId)
+                          }
                         >
                           Pay
                         </Button>
@@ -164,8 +173,8 @@ export default function Booking() {
                         {moment(returnTime).format("Do, h:mm a")}
                       </TableCell>
                       <TableCell>
-                        <span className="bg-yellow-500 px-4 py-2 rounded-sm">
-                          {paidStatus && "Pending"}
+                        <span className="bg-green-500 text-white px-4 py-2 rounded-sm">
+                          {paidStatus && "Paid"}
                         </span>
                       </TableCell>
                       <TableCell>{totalCost}</TableCell>

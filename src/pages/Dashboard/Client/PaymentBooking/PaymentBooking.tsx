@@ -1,26 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 
-import { Bike, Tag, Clock, DollarSign } from "lucide-react";
+import { Bike, Tag, DollarSign } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLocation } from "react-router-dom";
 import Loader from "@/components/shared/Loader";
 import { useSingleBikeQuery } from "@/redux/features/bike/bikeApi";
-import { useCreateRentalMutation } from "@/redux/features/book/bookApi";
+import {
+  useCreateRentalMutation,
+  useUpdateWithPaymentMutation,
+} from "@/redux/features/book/bookApi";
 import { toast } from "@/components/ui/use-toast";
 
 export default function PaymentBooking() {
   const location = useLocation();
-  const { id, startTime, paidStatus } = location.state || {};
-  console.log(id, startTime, paidStatus);
+  const { id, startTime, paidStatus, totalPrice, bookingId } =
+    location.state || {};
+
+  console.log(location.state);
+
   const [couponCode, setCouponCode] = useState("");
   const [discount, setDiscount] = useState(0);
 
   const { data: bikeData, isLoading } = useSingleBikeQuery(id);
   const [createBooking, { isLoading: bookingLoading }] =
     useCreateRentalMutation();
+
+  const [updateWithPayment, { isLoading: paymentLoading }] =
+    useUpdateWithPaymentMutation();
 
   if (isLoading) {
     return <Loader />;
@@ -32,15 +41,13 @@ export default function PaymentBooking() {
     name: name,
     image: image,
     pricePerHour: pricePerHour,
-    totalHours: 4,
   };
 
-  const basePrice = bikeDetails.pricePerHour * bikeDetails.totalHours;
-  const totalPrice = basePrice - discount;
+  const totalPrices = totalPrice - discount;
 
   const handleCouponApply = () => {
     if (couponCode.toLowerCase() === "bike50") {
-      setDiscount(basePrice * 0.5);
+      setDiscount(totalPrice * 0.5);
     } else {
       setDiscount(0);
     }
@@ -57,6 +64,29 @@ export default function PaymentBooking() {
             title: res.message,
           });
 
+          window.location.href = res.paymentSession.payment_url;
+        }
+      } catch (error: any) {
+        toast({
+          variant: "destructive",
+          title: error?.data?.message,
+        });
+      }
+    } else {
+      console.log("test1", totalPrices);
+      try {
+        const res = await updateWithPayment({
+          id: bookingId,
+          amount: totalPrices,
+        }).unwrap();
+
+        console.log(res);
+
+        if (res.success) {
+          toast({
+            variant: "default",
+            title: res.message,
+          });
           window.location.href = res.paymentSession.payment_url;
         }
       } catch (error: any) {
@@ -89,13 +119,9 @@ export default function PaymentBooking() {
                     <Tag className="w-5 h-5 mr-2" />
                     <span>${bikeDetails.pricePerHour} / hour</span>
                   </div>
-                  <div className="flex items-center">
-                    <Clock className="w-5 h-5 mr-2" />
-                    <span>{bikeDetails.totalHours} hours</span>
-                  </div>
                   <div className="flex items-center text-xl font-bold text-gray-800">
                     <DollarSign className="w-6 h-6 mr-2" />
-                    <span>${totalPrice}</span>
+                    <span>${totalPrices}</span>
                   </div>
                 </div>
               )}
@@ -134,9 +160,9 @@ export default function PaymentBooking() {
                   size="lg"
                 >
                   <Bike className="w-5 h-5 mr-2" />
-                  {bookingLoading
+                  {bookingLoading || paymentLoading
                     ? `Booking...`
-                    : `Ride Now for ${paidStatus ? "100" : `${totalPrice}`}`}
+                    : `Ride Now for ${paidStatus ? "100" : `${totalPrices}`}`}
                 </Button>
               </div>
             </CardContent>

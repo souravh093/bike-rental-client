@@ -10,6 +10,17 @@ const bookApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Rental"],
     }),
+    updateWithPayment: builder.mutation({
+      query: ({id, amount}) => {
+        console.log(amount)
+        return {
+          url: `/rentals/pay/${id}`,
+          method: "PUT",
+          body: {amount}
+        };
+      },
+      invalidatesTags: ["Rental"],
+    }),
     getRentals: builder.query({
       query: (query) => {
         const params = new URLSearchParams();
@@ -28,4 +39,8 @@ const bookApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCreateRentalMutation, useGetRentalsQuery } = bookApi;
+export const {
+  useCreateRentalMutation,
+  useGetRentalsQuery,
+  useUpdateWithPaymentMutation,
+} = bookApi;
