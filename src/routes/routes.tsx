@@ -9,6 +9,7 @@ import Profile from "@/pages/Dashboard/Admin/Porfile/Profile";
 import Users from "@/pages/Dashboard/Admin/Users/Users";
 import BikeDetails from "@/pages/Dashboard/Client/BikeDetails/BikeDetails";
 import ClientBikeManagement from "@/pages/Dashboard/Client/ClientBikeManagement/ClientBikeManagement";
+import PaymentBooking from "@/pages/Dashboard/Client/PaymentBooking/PaymentBooking";
 import Error from "@/pages/Error/Error";
 import Home from "@/pages/Home/Home";
 import PrivateRoute from "@/private/PrivateRoute";
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
       {
         path: "bike-details/:id",
         element: <BikeDetails />
+      },
+      {
+        path: "payment-booking",
+        element: <PaymentBooking />
       }
     ],
   },

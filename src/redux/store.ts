@@ -12,18 +12,25 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import authReducer from "./features/auth/authSlice";
+import bookReducer from "./features/book/bookSlice";
 
 const persistConfig = {
   key: "auth",
   storage,
 };
+const bookPersistConfig = {
+  key: "book",
+  storage,
+};
 
 const persistedAuthReducer = persistReducer(persistConfig, authReducer);
+const persistedBookReducer = persistReducer(bookPersistConfig, bookReducer);
 
 export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
     auth: persistedAuthReducer,
+    book: persistedBookReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -7,19 +7,19 @@ const teamMembers = [
     name: "Sarah Johnson",
     role: "Founder & CEO",
     bio: "Sarah founded Bike Rental Service with a passion for sustainable transportation and urban exploration. With over 15 years of experience in the cycling industry, she leads our team with vision and enthusiasm.",
-    image: "/placeholder.svg?height=300&width=300",
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     name: "Michael Chen",
     role: "Head of Operations",
     bio: "Michael ensures our day-to-day operations run smoothly. His background in logistics and customer service helps us deliver an exceptional experience to every rider.",
-    image: "/placeholder.svg?height=300&width=300",
+    image: "https://plus.unsplash.com/premium_photo-1664536392779-049ba8fde933?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     name: "Emma Rodriguez",
     role: "Chief Marketing Officer",
     bio: "Emma brings our story to life. Her creative marketing strategies have put Bike Rental Service on the map and continue to inspire more people to choose two wheels.",
-    image: "/placeholder.svg?height=300&width=300",
+    image: "https://plus.unsplash.com/premium_photo-1670884441012-c5cf195c062a?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];
 
@@ -28,8 +28,8 @@ const milestones = [
   { year: 2013, event: "Expanded to 5 locations across the city" },
   { year: 2015, event: "Introduced electric bikes to our fleet" },
   { year: 2018, event: "Launched our mobile app for easy bookings" },
-  { year: 2020, event: "Reached 1 million rides milestone" },
-  { year: 2023, event: "Expanded to 10 cities nationwide" },
+  { year: 2022, event: "Reached 1 million rides milestone" },
+  { year: 2024, event: "Expanded to 10 cities nationwide" },
 ];
 
 export default function AboutUs() {
@@ -64,9 +64,7 @@ export default function AboutUs() {
                 <img
                   src={member.image}
                   alt={member.name}
-                  width={300}
-                  height={300}
-                  className="rounded-full mx-auto mb-4"
+                  className="rounded-full w-[300px] h-[300px] object-cover mx-auto mb-4"
                 />
                 <h3 className="text-xl font-semibold text-center">
                   {member.name}
@@ -105,15 +103,15 @@ export default function AboutUs() {
           <CardContent className="p-6 space-y-4">
             <div className="flex items-center space-x-4">
               <MapPin className="w-6 h-6 text-primary" />
-              <span>123 Bike Lane, Cycling City, CC 12345</span>
+              <span>8200, Barishal, Bangladesh</span>
             </div>
             <div className="flex items-center space-x-4">
               <Phone className="w-6 h-6 text-primary" />
-              <span>+1 (555) 123-4567</span>
+              <span>+88 (013) 075 28955</span>
             </div>
             <div className="flex items-center space-x-4">
               <Mail className="w-6 h-6 text-primary" />
-              <span>info@bikerentalservice.com</span>
+              <span>souravehalder925@gmail.com</span>
             </div>
           </CardContent>
         </Card>

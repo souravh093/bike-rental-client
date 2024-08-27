@@ -1,6 +1,6 @@
+import { CreateBookingModal } from "@/components/modal/CreateBookingModal";
 import Loader from "@/components/shared/Loader";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { useSingleBikeQuery } from "@/redux/features/bike/bikeApi";
 import { useParams } from "react-router-dom";
 
@@ -14,7 +14,7 @@ const BikeDetails = () => {
     return <Loader />;
   }
 
-  const { name, pricePerHour, model, brand, year, description, image, cc } =
+  const { _id, name, pricePerHour, model, brand, year, description, image, cc } =
     bikeDetails.data;
   return (
     <div>
@@ -60,9 +60,7 @@ const BikeDetails = () => {
                 <p>{year}</p>
               </div>
             </div>
-            <Button size="lg" className="w-full">
-              Book Now
-            </Button>
+            <CreateBookingModal id={_id} />
           </div>
         </div>
       </div>

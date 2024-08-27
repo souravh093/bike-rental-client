@@ -96,7 +96,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t text-center text-muted-foreground">
-          <p>&copy; 2023 Bike Rental Service. All rights reserved.</p>
+          <p>&copy; 2024 Bike Booker. All rights reserved.</p>
         </div>
       </div>
     </footer>
