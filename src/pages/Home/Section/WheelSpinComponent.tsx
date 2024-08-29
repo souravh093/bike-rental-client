@@ -12,6 +12,8 @@ import { CouponModal } from "@/components/modal/CouponModal";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import "./WheelSpinComponent.css";
 import { useGetAllCouponsQuery } from "@/redux/features/coupon/couponApi";
+import { motion } from "framer-motion";
+import { fadeIn } from "@/variant";
 
 type Coupon = {
   title: string;
@@ -55,7 +57,13 @@ export default function WheelSpinComponent() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center py-24 bg-white dark:bg-gray-900 p-4">
+    <motion.div
+      variants={fadeIn("left", 0)}
+      initial="hidden"
+      whileInView={"show"}
+      viewport={{ once: false, amount: 0.7 }}
+      className="flex flex-col items-center justify-center py-24 bg-white dark:bg-gray-900 p-4"
+    >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center w-full max-w-6xl">
         <div className="text-center md:text-left">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
@@ -155,6 +163,6 @@ export default function WheelSpinComponent() {
           </Card>
         </CouponModal>
       )}
-    </div>
+    </motion.div>
   );
 }

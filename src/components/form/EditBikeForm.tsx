@@ -41,9 +41,8 @@ const EditBikeForm: React.FC<CreateBikeFormProps> = ({ setOpen, data }) => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (values) => {
-    console.log(values);
+
     let imageUrl;
-    console.log(imageUrl);
 
     if (values.image?.[0]) {
       const imageFile = values.image[0];
@@ -80,7 +79,6 @@ const EditBikeForm: React.FC<CreateBikeFormProps> = ({ setOpen, data }) => {
       image: imageUrl ? imageUrl : data?.image,
     };
 
-    console.log(bikeData);
 
     try {
       const res = await updateBike({ data: bikeData, id: data._id }).unwrap();

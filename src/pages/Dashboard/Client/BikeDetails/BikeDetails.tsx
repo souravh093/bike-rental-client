@@ -8,13 +8,11 @@ const BikeDetails = () => {
   const { id } = useParams();
   const { data: bikeDetails, isLoading } = useSingleBikeQuery(id);
 
-  console.log(bikeDetails);
-
   if (isLoading) {
     return <Loader />;
   }
 
-  const { _id, name, pricePerHour, model, brand, year, description, image, cc } =
+  const { _id, name, pricePerHour, model, brand, year, description, image, cc, isAvailable } =
     bikeDetails.data;
   return (
     <div>
@@ -58,6 +56,10 @@ const BikeDetails = () => {
               <div>
                 <p className="text-muted-foreground">Year</p>
                 <p>{year}</p>
+              </div>
+              <div>
+                <p className="text-muted-foreground">Availability</p>
+                <p>{isAvailable ? "Available" : "Not Available"}</p>
               </div>
             </div>
             <CreateBookingModal id={_id} />

@@ -61,8 +61,6 @@ const Profile = () => {
     try {
       const res = await updateUser(userData).unwrap();
 
-      console.log(res);
-
       if (res.success) {
         toast({
           variant: "default",

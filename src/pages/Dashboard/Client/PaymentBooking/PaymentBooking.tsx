@@ -22,7 +22,6 @@ export default function PaymentBooking() {
 
   const { data: couponData } = useGetAllCouponsQuery(undefined);
   const coupons = couponData?.data;
-  console.log(coupons);
 
   const [couponCode, setCouponCode] = useState("");
   const [discount, setDiscount] = useState(0);
@@ -80,14 +79,11 @@ export default function PaymentBooking() {
         });
       }
     } else {
-      console.log("test1", totalPrices);
       try {
         const res = await updateWithPayment({
           id: bookingId,
           amount: totalPrices,
         }).unwrap();
-
-        console.log(res);
 
         if (res.success) {
           toast({

@@ -36,10 +36,10 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const res = await login(data).unwrap();
-    console.log(res);
+
 
     const user = verifyToken(res.token);
-    console.log(user);
+
     try {
       dispatch(
         setUser({
@@ -52,7 +52,7 @@ const Login = () => {
       navigate("/dashboard");
     } catch (error) {
       console.log(error);
-      toast({ title: "Something went wrong" }); // TODO
+      toast({ title: "Something went wrong" }); 
     }
   };
 

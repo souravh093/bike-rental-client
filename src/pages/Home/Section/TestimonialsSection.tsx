@@ -7,6 +7,8 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { motion } from "framer-motion";
+import { fadeIn } from "@/variant";
 
 const testimonials = [
   {
@@ -40,7 +42,13 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   return (
-    <section className="relative mt-20 py-20 overflow-hidden">
+    <motion.div
+      variants={fadeIn("right", 0)}
+      initial="hidden"
+      whileInView={"show"}
+      viewport={{ once: false, amount: 0.7 }}
+      className="relative mt-20 py-20 overflow-hidden"
+    >
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
         style={{
@@ -57,7 +65,7 @@ export default function TestimonialsSection() {
             Don't just take our word for it - hear from our satisfied customers
           </p>
         </div>
-        
+
         <Carousel
           opts={{
             align: "start",
@@ -109,6 +117,6 @@ export default function TestimonialsSection() {
           <CarouselNext />
         </Carousel>
       </div>
-    </section>
+    </motion.div>
   );
 }

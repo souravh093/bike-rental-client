@@ -20,7 +20,7 @@ import { toast } from "@/components/ui/use-toast";
 export default function ReturnBike() {
   const { data: initialPaidData, isLoading: isInitialPaidLoading } =
     useGetInitialBookingQuery(undefined);
-  console.log(initialPaidData);
+
   const [calculateBooking, { isLoading: calculateLoading }] =
     useReturnCalculationMutation();
 

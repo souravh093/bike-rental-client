@@ -21,7 +21,6 @@ const ConfirmDeleteUserModal = ({ id }: { id: string | undefined }) => {
   const handleUserDelete = async () => {
     try {
       const res = await deleteUsers(id).unwrap();
-      console.log(res)
       if (res.success) {
         toast({
           variant: "default",

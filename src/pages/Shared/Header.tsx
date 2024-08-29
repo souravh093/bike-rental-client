@@ -24,17 +24,17 @@ const Header = () => {
     navigate("/");
   };
   return (
-    <div className="bg-gray-100 dark:bg-gray-800">
+    <div className="bg-gray-100 dark:bg-gray-900 sticky top-0 z-40 shadow-md">
       <Container>
         <div className="py-6 flex items-center justify-between">
           <Link to={"/"}>
-            <img className="w-44" src={logo} alt="logo" />
+            <img className="w-32 lg:w-44 dark:invert" src={logo} alt="logo" />
           </Link>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 lg:gap-4">
             <NavLink
               to={"/"}
               className={({ isActive }) =>
-                `font-semibold hover:text-gray-700 transition duration-75 ${
+                `font-semibold text-sm lg:text-base hover:text-gray-700 transition duration-75 ${
                   isActive ? "border-b border-yellow-500" : ""
                 }`
               }
@@ -44,7 +44,7 @@ const Header = () => {
             <NavLink
               to={"/about"}
               className={({ isActive }) =>
-                `font-semibold hover:text-gray-700 transition duration-75 ${
+                `font-semibold text-sm lg:text-base hover:text-gray-700 transition duration-75 ${
                   isActive ? "border-b border-yellow-500" : ""
                 }`
               }
@@ -54,7 +54,7 @@ const Header = () => {
             <NavLink
               to={"/comparison"}
               className={({ isActive }) =>
-                `font-semibold hover:text-gray-700 transition duration-75 ${
+                `font- text-sm lg:text-base hover:text-gray-700 transition duration-75 ${
                   isActive ? "border-b border-yellow-500" : ""
                 }`
               }

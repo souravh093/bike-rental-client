@@ -14,6 +14,7 @@ import BikeDetails from "@/pages/Dashboard/Client/BikeDetails/BikeDetails";
 import Booking from "@/pages/Dashboard/Client/Booking/Booking";
 import ClientBikeManagement from "@/pages/Dashboard/Client/ClientBikeManagement/ClientBikeManagement";
 import PaymentBooking from "@/pages/Dashboard/Client/PaymentBooking/PaymentBooking";
+import DashboardHome from "@/pages/Dashboard/DashboardHome";
 import Error from "@/pages/Error/Error";
 import Home from "@/pages/Home/Home";
 import PrivateRoute from "@/private/PrivateRoute";
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
     children: [
       // Admin Dashboard
       {
+        index: true,
+        element: <DashboardHome />
+      },
+      {
         path: "profile",
         element: <Profile />,
       },
@@ -100,6 +105,10 @@ const router = createBrowserRouter([
       },
       {
         path: "my-rental",
+        element: <Booking />,
+      },
+      {
+        path: "my-rental-paid",
         element: <Booking />,
       },
     ],

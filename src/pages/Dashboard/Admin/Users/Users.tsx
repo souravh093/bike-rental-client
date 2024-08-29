@@ -70,7 +70,6 @@ const Users = () => {
         title: error?.data?.message,
       });
     }
-    console.log(value, id);
   };
 
   return (
