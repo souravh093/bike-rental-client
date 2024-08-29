@@ -1,4 +1,9 @@
-import { Bike, Home, LineChart, ShoppingCart, Users } from "lucide-react";
+import {
+  Bike,
+  Home,
+  Undo2,
+  Users,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 
 const AdminSidebar = () => {
@@ -12,11 +17,11 @@ const AdminSidebar = () => {
         Dashboard
       </Link>
       <Link
-        to={"/"}
+        to={"/dashboard/return-bike"}
         className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
       >
-        <ShoppingCart className="h-4 w-4" />
-        Orders
+        <Undo2 className="h-4 w-4" />
+        Return Bikes
       </Link>
       <Link
         to={"/dashboard/admin-bike-management"}
@@ -31,13 +36,6 @@ const AdminSidebar = () => {
       >
         <Users className="h-4 w-4" />
         Users
-      </Link>
-      <Link
-        to={"/"}
-        className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-      >
-        <LineChart className="h-4 w-4" />
-        Analytics
       </Link>
     </nav>
   );

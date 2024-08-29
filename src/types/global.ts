@@ -7,6 +7,7 @@ interface BikeId {
   image: string;
   name: string;
   _id: string;
+  pricePerHour: number;
 }
 
 export interface TBooking {
@@ -16,4 +17,5 @@ export interface TBooking {
   returnTime: Date;
   totalCost: number;
   paidStatus: string;
+  transactionId: string;
 }

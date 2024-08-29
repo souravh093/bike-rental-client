@@ -6,6 +6,7 @@ import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
 import BikeManagement from "@/pages/Dashboard/Admin/BikeManagement/BikeManagement";
 import Profile from "@/pages/Dashboard/Admin/Porfile/Profile";
+import ReturnBike from "@/pages/Dashboard/Admin/ReturnBike/ReturnBike";
 import Users from "@/pages/Dashboard/Admin/Users/Users";
 import BikeDetails from "@/pages/Dashboard/Client/BikeDetails/BikeDetails";
 import Booking from "@/pages/Dashboard/Client/Booking/Booking";
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: "users",
         element: <Users />
+      },
+      {
+        path: "return-bike",
+        element: <ReturnBike />
       },
 
       // Client Dashboard
