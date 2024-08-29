@@ -92,7 +92,7 @@ const Users = () => {
           {isLoading || isFetching ? (
             <LoadingSkeleton />
           ) : allUsers?.data.length < 1 || allUsers?.data?.success === false ? (
-            <div>no data found</div>
+            <div className="text-red-500 py-5">No Users found</div>
           ) : (
             allUsers?.data?.map(
               (

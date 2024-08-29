@@ -1,13 +1,10 @@
 import Container from "@/components/shared/Container";
 import logo from "@/assets/logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/Theme/ModeToggle";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import {
-  logout,
-  useCurrentToken,
-} from "@/redux/features/auth/authSlice";
+import { logout, useCurrentToken } from "@/redux/features/auth/authSlice";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -34,24 +31,36 @@ const Header = () => {
             <img className="w-44" src={logo} alt="logo" />
           </Link>
           <div className="flex items-center gap-4">
-            <Link
+            <NavLink
               to={"/"}
-              className="font-semibold hover:text-gray-700 transition duration-75"
+              className={({ isActive }) =>
+                `font-semibold hover:text-gray-700 transition duration-75 ${
+                  isActive ? "border-b border-yellow-500" : ""
+                }`
+              }
             >
               Home
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to={"/about"}
-              className="font-semibold hover:text-gray-700 transition duration-75"
+              className={({ isActive }) =>
+                `font-semibold hover:text-gray-700 transition duration-75 ${
+                  isActive ? "border-b border-yellow-500" : ""
+                }`
+              }
             >
               About us
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to={"/comparison"}
-              className="font-semibold hover:text-gray-700 transition duration-75"
+              className={({ isActive }) =>
+                `font-semibold hover:text-gray-700 transition duration-75 ${
+                  isActive ? "border-b border-yellow-500" : ""
+                }`
+              }
             >
               Comparison
-            </Link>
+            </NavLink>
           </div>
           <div className="flex items-center gap-4">
             <ModeToggle />

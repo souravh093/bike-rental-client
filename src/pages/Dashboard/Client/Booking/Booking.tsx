@@ -64,7 +64,7 @@ export default function Booking() {
                 <LoadingSkeleton />
               ) : initialPaidData?.data.length < 1 ||
                 initialPaidData?.data?.success === false ? (
-                <div>no data found</div>
+                <div className="text-red-500 py-5">No Bike found</div>
               ) : (
                 initialPaidData?.data?.map(
                   (

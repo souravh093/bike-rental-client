@@ -24,7 +24,6 @@ interface AvailableBikeProps {
 }
 
 const AvailableBike = ({ searchQuery }: AvailableBikeProps) => {
-
   const user = useAppSelector(selectCurrentUser);
 
   const role = user ? user.role : null;
@@ -33,19 +32,17 @@ const AvailableBike = ({ searchQuery }: AvailableBikeProps) => {
     { name: "isAvailable", value: true },
   ]);
 
-  const {
-    data: bikeData,
-    isLoading,
-    isFetching,
-  } = useGetBikesQuery(
+  const { data: bikeData, isLoading } = useGetBikesQuery(
     [
       ...params,
       { name: "page", value: currentPage },
       { name: "limit", value: 8 },
-      {name: "searchTerm", value: searchQuery}
+      { name: "searchTerm", value: searchQuery },
     ],
     { pollingInterval: 30000 }
   );
+
+  console.log(bikeData);
 
   return (
     <div className="mt-5">
@@ -57,8 +54,10 @@ const AvailableBike = ({ searchQuery }: AvailableBikeProps) => {
           <h1 className="text-4xl font-black uppercase">Available Bikes</h1>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {isLoading || isFetching ? (
+          {isLoading ? (
             <SkeletonCard />
+          ) : bikeData?.data.length < 1 ? (
+            <span className="text-red-500">No bike found</span>
           ) : (
             bikeData?.data.map(
               ({ image, brand, _id, name, model, cc, year }: TBike) => (

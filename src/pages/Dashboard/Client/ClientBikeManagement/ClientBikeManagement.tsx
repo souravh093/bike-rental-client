@@ -139,7 +139,7 @@ const ClientBikeManagement = () => {
           {isLoading || isFetching ? (
             <LoadingSkeleton />
           ) : bikeData?.data.length < 1 || bikeData?.data?.success === false ? (
-            <div>no data found</div>
+            <div className="text-red-500 py-5">No Bike found</div>
           ) : (
             bikeData?.data?.map(
               (
