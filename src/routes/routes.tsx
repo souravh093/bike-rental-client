@@ -5,6 +5,7 @@ import AboutUs from "@/pages/About/About";
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
 import BikeManagement from "@/pages/Dashboard/Admin/BikeManagement/BikeManagement";
+import CouponManagement from "@/pages/Dashboard/Admin/CouponManagement/CouponManagement";
 import Profile from "@/pages/Dashboard/Admin/Porfile/Profile";
 import Users from "@/pages/Dashboard/Admin/Users/Users";
 import BikeDetails from "@/pages/Dashboard/Client/BikeDetails/BikeDetails";
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: "users",
         element: <Users />
+      },
+      {
+        path: "coupon-management",
+        element: <CouponManagement />
       },
 
       // Client Dashboard
