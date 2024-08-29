@@ -17,8 +17,9 @@ const bookSlice = createSlice({
   initialState,
   reducers: {
     setInitialBook: (state, action) => {
-      console.log(action.payload);
-      state = action.payload;
+      state.advancedPayment = action.payload.advancedPayment;
+      state.bikeId = action.payload.bikeId;
+      state.startTime = action.payload.startTime;
     },
     removeInitialBook: (state) => {
       state.advancedPayment = 100;

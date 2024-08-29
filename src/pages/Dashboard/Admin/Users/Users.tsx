@@ -39,7 +39,7 @@ import ConfirmDeleteUserModal from "@/components/modal/ConfirmDeleteUserModal";
 const Users = () => {
   const [updateRole] =
     useUpdateRoleMutation();
-  const [params, setParams] = useState<TQueryParam[]>([]);
+  const [params] = useState<TQueryParam[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const {
     data: allUsers,

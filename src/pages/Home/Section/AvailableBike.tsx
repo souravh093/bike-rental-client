@@ -27,8 +27,8 @@ const AvailableBike = ({ searchQuery }: AvailableBikeProps) => {
   const user = useAppSelector(selectCurrentUser);
 
   const role = user ? user.role : null;
-  const [currentPage, setCurrentPage] = useState(1);
-  const [params, setParams] = useState<TQueryParam[]>([
+  const [currentPage] = useState(1);
+  const [params] = useState<TQueryParam[]>([
     { name: "isAvailable", value: true },
   ]);
 
