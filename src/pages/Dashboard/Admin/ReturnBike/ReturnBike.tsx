@@ -92,7 +92,7 @@ export default function ReturnBike() {
                   <TableCell>
                     {moment(startTime).format("Do ,h:mm a")}
                   </TableCell>
-                  <TableCell>{pricePerHour} TK</TableCell>
+                  <TableCell>{pricePerHour} BDT</TableCell>
                   <TableCell>
                     <span
                       className={`${
@@ -114,7 +114,7 @@ export default function ReturnBike() {
                     <TableCell>No Available</TableCell>
                   )}
                   {totalCost > 0 ? (
-                    <TableCell>{totalCost} TK</TableCell>
+                    <TableCell>{totalCost} BDT</TableCell>
                   ) : (
                     <TableCell>Not Available</TableCell>
                   )}

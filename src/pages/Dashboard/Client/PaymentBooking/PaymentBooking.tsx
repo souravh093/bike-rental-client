@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 
-import { Bike, Tag, DollarSign } from "lucide-react";
+import { Bike, Tag, IndianRupee } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,13 +13,16 @@ import {
   useUpdateWithPaymentMutation,
 } from "@/redux/features/book/bookApi";
 import { toast } from "@/components/ui/use-toast";
+import { useGetAllCouponsQuery } from "@/redux/features/coupon/couponApi";
 
 export default function PaymentBooking() {
   const location = useLocation();
   const { id, startTime, paidStatus, totalPrice, bookingId } =
     location.state || {};
 
-  console.log(location.state);
+  const { data: couponData } = useGetAllCouponsQuery(undefined);
+  const coupons = couponData?.data;
+  console.log(coupons);
 
   const [couponCode, setCouponCode] = useState("");
   const [discount, setDiscount] = useState(0);
@@ -43,11 +46,15 @@ export default function PaymentBooking() {
     pricePerHour: pricePerHour,
   };
 
-  const totalPrices = totalPrice - discount;
+  const totalPrices = totalPrice - Number(discount.toFixed(0));
 
   const handleCouponApply = () => {
-    if (couponCode.toLowerCase() === "bike50") {
-      setDiscount(totalPrice * 0.5);
+    const matchedCoupon = coupons.find(
+      (coupon: { title: string; coupon: string; discount: number }) =>
+        coupon.coupon.toLowerCase() === couponCode.toLowerCase()
+    );
+    if (matchedCoupon) {
+      setDiscount(totalPrice * (matchedCoupon.discount / 100));
     } else {
       setDiscount(0);
     }
@@ -117,11 +124,11 @@ export default function PaymentBooking() {
                 <div className="space-y-2 text-gray-600">
                   <div className="flex items-center">
                     <Tag className="w-5 h-5 mr-2" />
-                    <span>${bikeDetails.pricePerHour} / hour</span>
+                    <span>{bikeDetails.pricePerHour} BDT / hour</span>
                   </div>
                   <div className="flex items-center text-xl font-bold text-gray-800">
-                    <DollarSign className="w-6 h-6 mr-2" />
-                    <span>${totalPrices}</span>
+                    <IndianRupee className="w-6 h-6 mr-2" />
+                    <span>{totalPrices} BDT</span>
                   </div>
                 </div>
               )}
@@ -148,7 +155,7 @@ export default function PaymentBooking() {
                   </div>
                   {discount > 0 && (
                     <p className="text-green-600 mb-4">
-                      Coupon applied! You saved ${discount}
+                      Coupon applied! You saved {discount} BDT
                     </p>
                   )}
                 </div>

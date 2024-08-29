@@ -1,23 +1,22 @@
 import { useState } from "react";
-import { MoveDownRight, RotateCw, Clipboard, Copy, MoveUpLeft } from "lucide-react";
+import {
+  MoveDownRight,
+  RotateCw,
+  Clipboard,
+  Copy,
+  MoveUpLeft,
+} from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import { CouponModal } from "@/components/modal/CouponModal";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import "./WheelSpinComponent.css";
-
-const coupons = [
-  { title: "10% OFF", discount: 10, code: "SAVE10" },
-  { title: "20% OFF", discount: 20, code: "SAVE20" },
-  { title: "30% OFF", discount: 30, code: "SAVE30" },
-  { title: "50% OFF", discount: 50, code: "SAVE50" },
-  { title: "No Luck", discount: 0, code: "N/A" },
-];
+import { useGetAllCouponsQuery } from "@/redux/features/coupon/couponApi";
 
 type Coupon = {
   title: string;
   discount: number;
-  code: string;
+  coupon: string;
 };
 
 export default function WheelSpinComponent() {
@@ -26,6 +25,8 @@ export default function WheelSpinComponent() {
   const [rotation, setRotation] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const { data: couponsData } = useGetAllCouponsQuery(undefined);
+
   const handleSpin = () => {
     if (isSpinning) return;
     setIsSpinning(true);
@@ -33,10 +34,12 @@ export default function WheelSpinComponent() {
     setRotation(newRotation);
 
     const selectedIndex = Math.floor(
-      (newRotation % 360) / (360 / coupons.length)
+      (newRotation % 360) / (360 / couponsData?.data.length)
     );
     setTimeout(() => {
-      setSelectedCoupon(coupons[coupons.length - 1 - selectedIndex]);
+      setSelectedCoupon(
+        couponsData.data[couponsData?.data.length - 1 - selectedIndex]
+      );
       setIsSpinning(false);
       setIsModalOpen(true);
     }, 5000);
@@ -79,12 +82,14 @@ export default function WheelSpinComponent() {
             className="wheel"
             style={{ transform: `rotate(${rotation}deg)` }}
           >
-            {coupons.map((coupon, index) => (
+            {couponsData?.data.map((coupon: Coupon, index: number) => (
               <div
                 key={index}
                 className="wheel-segment"
                 style={{
-                  transform: `rotate(${index * (360 / coupons.length)}deg)`,
+                  transform: `rotate(${
+                    index * (360 / couponsData?.data.length)
+                  }deg)`,
                   background: index % 2 === 0 ? "#FF6347" : "#FFD700",
                 }}
               >
@@ -128,10 +133,10 @@ export default function WheelSpinComponent() {
                 {selectedCoupon.discount > 0 ? (
                   <Button
                     variant="outline"
-                    onClick={() => copyToClipboard(selectedCoupon.code)}
+                    onClick={() => copyToClipboard(selectedCoupon.coupon)}
                   >
                     <Clipboard className="mr-2 h-4 w-4" />
-                    {selectedCoupon.code}
+                    {selectedCoupon.coupon}
                   </Button>
                 ) : (
                   <p className="mt-2 text-red-500">

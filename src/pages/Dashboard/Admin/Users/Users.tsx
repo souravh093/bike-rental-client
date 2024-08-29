@@ -104,7 +104,7 @@ const Users = () => {
                   <TableCell className="font-medium">
                     {moment(createdAt).format("MMM Do YY")}
                   </TableCell>
-                  <TableCell>{name} $</TableCell>
+                  <TableCell>{name}</TableCell>
                   <TableCell>{email}</TableCell>
                   <TableCell>{phone}</TableCell>
                   <TableCell>{address}</TableCell>

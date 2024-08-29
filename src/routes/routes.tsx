@@ -4,6 +4,7 @@ import RootLayout from "@/layout/RootLayout";
 import AboutUs from "@/pages/About/About";
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
+import Comparison from "@/pages/Comparision/Comparision";
 import BikeManagement from "@/pages/Dashboard/Admin/BikeManagement/BikeManagement";
 import CouponManagement from "@/pages/Dashboard/Admin/CouponManagement/CouponManagement";
 import Profile from "@/pages/Dashboard/Admin/Porfile/Profile";
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <AboutUs />,
+      },
+      {
+        path: "/comparison",
+        element: <Comparison />,
       },
     ],
   },

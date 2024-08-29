@@ -46,6 +46,12 @@ const Header = () => {
             >
               About us
             </Link>
+            <Link
+              to={"/comparison"}
+              className="font-semibold hover:text-gray-700 transition duration-75"
+            >
+              Comparison
+            </Link>
           </div>
           <div className="flex items-center gap-4">
             <ModeToggle />
