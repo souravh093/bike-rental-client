@@ -1,20 +1,17 @@
 import video from "@/assets/hero.mp4";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { TQueryParam } from "@/types/global";
-import { useState } from "react";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 
-const Hero = () => {
-  const [params, setParams] = useState<TQueryParam[]>([]);
+interface HeroProps {
+  onSearch: (query: string) => void;
+}
 
-  console.log(params);
-
-  const handleSearch = (value: string) => {
-    setParams((prevParams) =>
-      prevParams
-        .filter((param) => param.name !== "searchTerm")
-        .concat({ name: "searchTerm", value })
-    );
+const Hero = ({ onSearch }: HeroProps) => {
+  const handleSearchSubmit: SubmitHandler<FieldValues> = (e) => {
+    e.preventDefault();
+    const search = e.target.search.value;
+    onSearch(search);
   };
   return (
     <div className="relative flex items-center justify-center h-[calc(100vh-88px)] bg-gray-900">
@@ -36,16 +33,19 @@ const Hero = () => {
         <p className="text-xl sm:text-2xl mb-8">
           Rent a bike and discover the beauty of urban cycling
         </p>
-        <div className="border p-4 rounded-lg shadow-lg max-w-md sm:max-w-xl lg:max-w-2xl flex items-center justify-center mx-auto gap-5">
+        <div className="border p-4 rounded-lg shadow-lg max-w-md sm:max-w-2xl lg:max-w-3xl flex items-center justify-center mx-auto gap-5">
           <Button size="lg" className="bg-yellow-500">
             Start Your Adventure
           </Button>
-          <Input
-            onBlur={(e) => handleSearch(e.target.value)}
-            type="text"
-            placeholder="Search bike..."
-            className="w-96 px-4 py-2 text-white outline-none rounded-lg transition duration-300 ease-in-out transform focus:scale-105"
-          />
+          <form onSubmit={handleSearchSubmit} className="flex gap-2">
+            <Input
+              name="search"
+              type="text"
+              placeholder="Search bike..."
+              className="w-96 px-4 py-2 text-black dark:text-white outline-none rounded-lg transition duration-300 ease-in-out transform focus:scale-105"
+            />
+            <Button type="submit" >Search</Button>
+          </form>
         </div>
       </div>
     </div>

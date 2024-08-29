@@ -19,7 +19,12 @@ import { TBike } from "@/types/bike";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 
-const AvailableBike = () => {
+interface AvailableBikeProps {
+  searchQuery: string;
+}
+
+const AvailableBike = ({ searchQuery }: AvailableBikeProps) => {
+
   const user = useAppSelector(selectCurrentUser);
 
   const role = user ? user.role : null;
@@ -27,15 +32,20 @@ const AvailableBike = () => {
   const [params, setParams] = useState<TQueryParam[]>([
     { name: "isAvailable", value: true },
   ]);
+
   const {
     data: bikeData,
     isLoading,
     isFetching,
-  } = useGetBikesQuery([
-    ...params,
-    { name: "page", value: currentPage },
-    { name: "limit", value: 8 },
-  ]);
+  } = useGetBikesQuery(
+    [
+      ...params,
+      { name: "page", value: currentPage },
+      { name: "limit", value: 8 },
+      {name: "searchTerm", value: searchQuery}
+    ],
+    { pollingInterval: 30000 }
+  );
 
   return (
     <div className="mt-5">
