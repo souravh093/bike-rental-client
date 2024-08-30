@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/select";
 import { useCreateBikeMutation } from "@/redux/features/bike/bikeApi";
 import { toast } from "../ui/use-toast";
+import { useState } from "react";
 
 const apiKey = "800d9ccab79ca9e964c7b1edac462750";
 
@@ -27,6 +28,7 @@ interface CreateBikeFormProps {
 }
 
 const CreateBikeForm: React.FC<CreateBikeFormProps> = ({ setOpen }) => {
+  const [isImageUploading, setIsImageUploading] = useState(false);
   const [createBike, { isLoading }] = useCreateBikeMutation();
   const {
     register,
@@ -47,6 +49,8 @@ const CreateBikeForm: React.FC<CreateBikeFormProps> = ({ setOpen }) => {
       formData.append("image", imageFile);
       formData.append("key", apiKey || "");
 
+      setIsImageUploading(true); 
+
       try {
         const res = await fetch("https://api.imgbb.com/1/upload", {
           method: "POST",
@@ -60,9 +64,12 @@ const CreateBikeForm: React.FC<CreateBikeFormProps> = ({ setOpen }) => {
       } catch (error) {
         console.log("Error uploading image", error);
         return null;
+      } finally {
+        setIsImageUploading(false); 
       }
     };
     const imageUrl = await uploadImageToImgbb(imageFile);
+    console.log(imageUrl, isLoading);
 
     const bikeData = {
       ...data,
@@ -70,9 +77,9 @@ const CreateBikeForm: React.FC<CreateBikeFormProps> = ({ setOpen }) => {
       image: imageUrl,
     };
 
-
     try {
       const res = await createBike(bikeData).unwrap();
+      console.log(res);
 
       if (res.success) {
         toast({
@@ -83,6 +90,7 @@ const CreateBikeForm: React.FC<CreateBikeFormProps> = ({ setOpen }) => {
 
       setOpen(false);
     } catch (error: any) {
+      console.log(error);
       toast({
         variant: "destructive",
         title: error?.data?.message,
@@ -213,8 +221,12 @@ const CreateBikeForm: React.FC<CreateBikeFormProps> = ({ setOpen }) => {
         </div>
       </div>
       <div className="flex items-center justify-start">
-        <Button type="submit">
-          {isLoading ? "Creating Bike..." : "Create Bike"}
+        <Button type="submit" disabled={isLoading || isImageUploading}>
+          {isImageUploading
+            ? "Uploading Image..."
+            : isLoading
+            ? "Creating Bike..."
+            : "Create Bike"}
         </Button>
       </div>
     </form>

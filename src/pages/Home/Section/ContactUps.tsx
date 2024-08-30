@@ -176,7 +176,7 @@ export default function ContactUs() {
                 <div>
                   <h3 className="font-semibold">Our Location</h3>
                   <p className="text-muted-foreground">
-                    123 Bike Lane, Cycling City, CC 12345
+                    8200, Barishal, Bangladesh
                     <br />
                     Open daily: 8AM - 8PM
                   </p>
@@ -187,7 +187,7 @@ export default function ContactUs() {
                 <div>
                   <h3 className="font-semibold">Phone</h3>
                   <p className="text-muted-foreground">
-                    +1 (555) 123-4567
+                    + (88) 01307-628955
                     <br />
                     Mon-Fri: 9AM - 6PM
                   </p>
@@ -198,9 +198,9 @@ export default function ContactUs() {
                 <div>
                   <h3 className="font-semibold">Email</h3>
                   <p className="text-muted-foreground">
-                    info@bikerentalservice.com
+                    souravehalder@gmail.com
                     <br />
-                    support@bikerentalservice.com
+                    souravh093@gmail.com
                   </p>
                 </div>
               </div>

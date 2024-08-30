@@ -60,7 +60,7 @@ const BikeDetailsClient = () => {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-muted-foreground">Engine Displacement</p>
+                <p className="text-muted-foreground">CC</p>
                 <p>{cc}</p>
               </div>
               <div>

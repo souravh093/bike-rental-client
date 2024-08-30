@@ -116,13 +116,13 @@ export default function PaymentBooking() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 p-8">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen dark:bg-gray-900  p-8">
+      <div className="max-w-4xl mx-auto ">
         <h1 className="text-4xl font-bold mb-8 text-center text-gray-800">
           Payment Here
         </h1>
         <div className="grid md:grid-cols-2 gap-8">
-          <Card className="bg-white/70 backdrop-blur-lg border-none shadow-lg">
+          <Card className="bg-white/70  backdrop-blur-lg border-none shadow-lg">
             <CardContent className="p-6">
               <div className="aspect-video relative overflow-hidden rounded-lg mb-6">
                 <img src={bikeDetails.image} alt={bikeDetails.name} />

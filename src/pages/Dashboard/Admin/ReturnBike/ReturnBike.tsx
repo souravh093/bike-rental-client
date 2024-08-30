@@ -19,7 +19,7 @@ import { toast } from "@/components/ui/use-toast";
 
 export default function ReturnBike() {
   const { data: initialPaidData, isLoading: isInitialPaidLoading } =
-    useGetInitialBookingQuery(undefined);
+    useGetInitialBookingQuery(undefined, { pollingInterval: 30000 });
 
   const [calculateBooking, { isLoading: calculateLoading }] =
     useReturnCalculationMutation();
@@ -63,7 +63,7 @@ export default function ReturnBike() {
             <LoadingSkeleton />
           ) : initialPaidData?.data.length < 1 ||
             initialPaidData?.data?.success === false ? (
-              <div className="text-red-500 py-5">No Bike found</div>
+            <div className="text-red-500 py-5">No Bike found</div>
           ) : (
             initialPaidData?.data?.map(
               (

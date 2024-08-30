@@ -65,11 +65,11 @@ const Login = () => {
           className="h-screen object-cover"
         />
       </div>
-      <div className="col-span-2 flex flex-col gap-4 items-center justify-center bg-[#DDFCF5]">
+      <div className="col-span-2 flex flex-col gap-4 items-center justify-center bg-[#DDFCF5] h-screen dark:bg-gray-900">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 bg-white p-10 rounded-md shadow-sm"
+            className="space-y-4 bg-white dark:bg-gray-800 p-10 rounded-md shadow-sm"
           >
             <SignupFormField
               name="email"

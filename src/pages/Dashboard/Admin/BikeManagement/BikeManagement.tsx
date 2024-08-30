@@ -73,52 +73,54 @@ const BikeManagement = () => {
   return (
     <>
       <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-5">
-          <Select onValueChange={handleValueChangeModal}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="CC" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="50">50</SelectItem>
-              <SelectItem value="100">100</SelectItem>
-              <SelectItem value="110">110</SelectItem>
-              <SelectItem value="125">125</SelectItem>
-              <SelectItem value="150">150</SelectItem>
-              <SelectItem value="160">160</SelectItem>
-              <SelectItem value="180">180</SelectItem>
-              <SelectItem value="200">200</SelectItem>
-              <SelectItem value="250">250</SelectItem>
-              <SelectItem value="300">300</SelectItem>
-            </SelectContent>
-          </Select>
+        <div className="grid lg:grid-cols-1 gap-2 grid-cols-1">
+          <div className="flex items-center gap-5">
+            <Select onValueChange={handleValueChangeModal}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="CC" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="50">50</SelectItem>
+                <SelectItem value="100">100</SelectItem>
+                <SelectItem value="110">110</SelectItem>
+                <SelectItem value="125">125</SelectItem>
+                <SelectItem value="150">150</SelectItem>
+                <SelectItem value="160">160</SelectItem>
+                <SelectItem value="180">180</SelectItem>
+                <SelectItem value="200">200</SelectItem>
+                <SelectItem value="250">250</SelectItem>
+                <SelectItem value="300">300</SelectItem>
+              </SelectContent>
+            </Select>
 
-          <Select onValueChange={handleValueChangeBrand}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Brand" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="honda">Honda</SelectItem>
-              <SelectItem value="yamaha">Yamaha</SelectItem>
-              <SelectItem value="suzuki">Suzuki</SelectItem>
-              <SelectItem value="bajaj">Bajaj</SelectItem>
-              <SelectItem value="hero">Hero</SelectItem>
-              <SelectItem value="tvs">TVS</SelectItem>
-              <SelectItem value="kawasaki">Kawasaki</SelectItem>
-              <SelectItem value="royal-enfield">Royal Enfield</SelectItem>
-              <SelectItem value="keeway">Keeway</SelectItem>
-              <SelectItem value="lifan">Lifan</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+            <Select onValueChange={handleValueChangeBrand}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Brand" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="honda">Honda</SelectItem>
+                <SelectItem value="yamaha">Yamaha</SelectItem>
+                <SelectItem value="suzuki">Suzuki</SelectItem>
+                <SelectItem value="bajaj">Bajaj</SelectItem>
+                <SelectItem value="hero">Hero</SelectItem>
+                <SelectItem value="tvs">TVS</SelectItem>
+                <SelectItem value="kawasaki">Kawasaki</SelectItem>
+                <SelectItem value="royal-enfield">Royal Enfield</SelectItem>
+                <SelectItem value="keeway">Keeway</SelectItem>
+                <SelectItem value="lifan">Lifan</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
 
-        <div className="flex items-center gap-5">
-          <Input
-            onChange={(e) => handleSearch(e.target.value)}
-            type="text"
-            placeholder="Search bike..."
-            className="w-96"
-          />
-          <CreateBikeModal />
+          <div className="flex items-center gap-5">
+            <Input
+              onChange={(e) => handleSearch(e.target.value)}
+              type="text"
+              placeholder="Search bike..."
+              className="w-96"
+            />
+            <CreateBikeModal />
+          </div>
         </div>
       </div>
       <Table>

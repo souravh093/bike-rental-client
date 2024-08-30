@@ -1,10 +1,14 @@
 import { CreateBookingModal } from "@/components/modal/CreateBookingModal";
 import Loader from "@/components/shared/Loader";
 import { Badge } from "@/components/ui/badge";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useSingleBikeQuery } from "@/redux/features/bike/bikeApi";
+import { useAppSelector } from "@/redux/hooks";
 import { useParams } from "react-router-dom";
 
 const BikeDetails = () => {
+  const currentUser = useAppSelector(selectCurrentUser);
+  const role = currentUser ? currentUser.role : null;
   const { id } = useParams();
   const { data: bikeDetails, isLoading } = useSingleBikeQuery(id);
 
@@ -46,7 +50,7 @@ const BikeDetails = () => {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-muted-foreground">Engine Displacement</p>
+                <p className="text-muted-foreground">CC</p>
                 <p>{cc}</p>
               </div>
               <div>
@@ -62,7 +66,7 @@ const BikeDetails = () => {
                 <p>{isAvailable ? "Available" : "Not Available"}</p>
               </div>
             </div>
-            <CreateBookingModal id={_id} />
+            <CreateBookingModal role={role} id={_id} />
           </div>
         </div>
       </div>

@@ -91,7 +91,7 @@ const Profile = () => {
 
   return (
     <div>
-      <div className="text-5xl font-black flex justify-center mb-5 uppercase border-b-2  items-center py-10 bg-gray-200">
+      <div className="text-5xl font-black flex justify-center mb-5 uppercase border-b-2  items-center py-10 bg-gray-200 dark:bg-gray-900">
         <h1>Welcome {name}</h1>
       </div>
 
