@@ -20,8 +20,9 @@ import {
 import { useCreateBikeMutation } from "@/redux/features/bike/bikeApi";
 import { toast } from "../ui/use-toast";
 import { useState } from "react";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "@/firebase/firebase.config";
 
-const apiKey = "800d9ccab79ca9e964c7b1edac462750";
 
 interface CreateBikeFormProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -39,36 +40,27 @@ const CreateBikeForm: React.FC<CreateBikeFormProps> = ({ setOpen }) => {
     resolver: zodResolver(formSchema),
   });
 
+  const uploadImageToFirebase = async (
+    imageFile: File
+  ): Promise<string | null | undefined> => {
+    const storageRef = ref(storage, `images/${imageFile.name}`);
+    setIsImageUploading(true);
+
+    try {
+      const snapshot = await uploadBytes(storageRef, imageFile);
+      const downloadURL = await getDownloadURL(snapshot.ref);
+      return downloadURL;
+    } catch (error) {
+      console.log("Error uploading image", error);
+      return null;
+    } finally {
+      setIsImageUploading(false);
+    }
+  };
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const imageFile = data.image?.[0];
-
-    const uploadImageToImgbb = async (
-      imageFile: File
-    ): Promise<string | null | undefined> => {
-      const formData = new FormData();
-      formData.append("image", imageFile);
-      formData.append("key", apiKey || "");
-
-      setIsImageUploading(true); 
-
-      try {
-        const res = await fetch("https://api.imgbb.com/1/upload", {
-          method: "POST",
-          body: formData,
-        });
-        const result = await res.json();
-
-        if (result.success) {
-          return result.data.url;
-        }
-      } catch (error) {
-        console.log("Error uploading image", error);
-        return null;
-      } finally {
-        setIsImageUploading(false); 
-      }
-    };
-    const imageUrl = await uploadImageToImgbb(imageFile);
+    const imageUrl = await uploadImageToFirebase(imageFile);
     console.log(imageUrl, isLoading);
 
     const bikeData = {
