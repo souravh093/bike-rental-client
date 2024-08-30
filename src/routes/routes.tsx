@@ -4,6 +4,7 @@ import RootLayout from "@/layout/RootLayout";
 import AboutUs from "@/pages/About/About";
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
+import BikeDetailsClient from "@/pages/BikeDetailsClient/BikeDetailsClient";
 import Comparison from "@/pages/Comparision/Comparision";
 import BikeManagement from "@/pages/Dashboard/Admin/BikeManagement/BikeManagement";
 import CouponManagement from "@/pages/Dashboard/Admin/CouponManagement/CouponManagement";
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/comparison",
         element: <Comparison />,
+      },
+      {
+        path: "/bike-details-client/:id",
+        element: <BikeDetailsClient />,
       },
     ],
   },

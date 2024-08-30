@@ -42,13 +42,7 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   return (
-    <motion.div
-      variants={fadeIn("right", 0)}
-      initial="hidden"
-      whileInView={"show"}
-      viewport={{ once: false, amount: 0.7 }}
-      className="relative mt-20 py-20 overflow-hidden"
-    >
+    <div className="relative mt-20 py-20 overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
         style={{
@@ -57,14 +51,20 @@ export default function TestimonialsSection() {
         }}
       />
       <div className="container relative z-10 mx-auto px-4">
-        <div className="text-center mb-12">
+        <motion.div
+          variants={fadeIn("right", 0)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.7 }}
+          className="text-center mb-12"
+        >
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
             What Our Clients Say
           </h2>
           <p className="mt-4 text-muted-foreground sm:text-xl">
             Don't just take our word for it - hear from our satisfied customers
           </p>
-        </div>
+        </motion.div>
 
         <Carousel
           opts={{
@@ -117,6 +117,6 @@ export default function TestimonialsSection() {
           <CarouselNext />
         </Carousel>
       </div>
-    </motion.div>
+    </div>
   );
 }

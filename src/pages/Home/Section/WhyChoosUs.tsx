@@ -43,13 +43,7 @@ const benefits = [
 
 export default function WhyChooseUs() {
   return (
-    <motion.div
-      variants={fadeIn("right", 0)}
-      initial="hidden"
-      whileInView={"show"}
-      viewport={{ once: false, amount: 0.7 }}
-      className="py-20 px-4 relative overflow-hidden bg-gradient-to-br from-background to-muted"
-    >
+    <div className="py-20 px-4 relative overflow-hidden bg-gradient-to-br from-background to-muted">
       <div
         className="absolute inset-0 bg-repeat bg-center opacity-5 -z-10"
         style={{
@@ -57,7 +51,13 @@ export default function WhyChooseUs() {
         }}
       />
       <div className="container mx-auto relative z-10">
-        <div className="text-center mb-12">
+        <motion.div
+          variants={fadeIn("right", 0)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.7 }}
+          className="text-center mb-12"
+        >
           <Badge className="mb-4" variant="secondary">
             Why Choose Us
           </Badge>
@@ -69,7 +69,7 @@ export default function WhyChooseUs() {
             adventures. We're committed to providing the best rental experience
             on two wheels.
           </p>
-        </div>
+        </motion.div>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {benefits.map((benefit, index) => (
             <Card
@@ -91,6 +91,6 @@ export default function WhyChooseUs() {
           ))}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

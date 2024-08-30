@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import {
   MoveDownRight,
@@ -11,9 +12,14 @@ import { Button } from "@/components/ui/button";
 import { CouponModal } from "@/components/modal/CouponModal";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import "./WheelSpinComponent.css";
-import { useGetAllCouponsQuery } from "@/redux/features/coupon/couponApi";
+import {
+  useGetAllCouponsQuery,
+  useUpsertCopyCouponMutation,
+} from "@/redux/features/coupon/couponApi";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/variant";
+import { useAppSelector } from "@/redux/hooks";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 
 type Coupon = {
   title: string;
@@ -22,6 +28,11 @@ type Coupon = {
 };
 
 export default function WheelSpinComponent() {
+  const currentUser = useAppSelector(selectCurrentUser);
+  const role = currentUser ? currentUser.role : null;
+
+  const [copyCoupon] = useUpsertCopyCouponMutation();
+
   const [selectedCoupon, setSelectedCoupon] = useState<Coupon | null>(null);
   const [isSpinning, setIsSpinning] = useState(false);
   const [rotation, setRotation] = useState(0);
@@ -47,25 +58,54 @@ export default function WheelSpinComponent() {
     }, 5000);
   };
 
-  const copyToClipboard = (code: string) => {
-    navigator.clipboard.writeText(code).then(() => {
+  const copyToClipboard = async (code: string) => {
+    try {
+      await navigator.clipboard.writeText(code);
+
+      if (role === "user") {
+        try {
+          const res = await copyCoupon({ coupon: code }).unwrap();
+
+          if (res.success) {
+            toast({
+              variant: "default",
+              title: res.message,
+            });
+          }
+        } catch (error: any) {
+          toast({
+            variant: "destructive",
+            title: error?.data?.message,
+          });
+        }
+      } else {
+        toast({
+          title: "Coupon code copied!",
+          description: `${code} has been copied to your clipboard.`,
+        });
+      }
+
+      setIsModalOpen(false);
+    } catch (error: any) {
+      console.log(error);
       toast({
-        title: "Coupon code copied!",
-        description: `${code} has been copied to your clipboard.`,
+        variant: "destructive",
+        title: "Failed to copy coupon code.",
+        description: "An error occurred while copying the coupon code.",
       });
-    });
+    }
   };
 
   return (
-    <motion.div
-      variants={fadeIn("left", 0)}
-      initial="hidden"
-      whileInView={"show"}
-      viewport={{ once: false, amount: 0.7 }}
-      className="flex flex-col items-center justify-center py-24 bg-white dark:bg-gray-900 p-4"
-    >
+    <div className="flex flex-col items-center justify-center py-24 bg-white dark:bg-gray-900 p-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center w-full max-w-6xl">
-        <div className="text-center md:text-left">
+        <motion.div
+          variants={fadeIn("left", 0)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.7 }}
+          className="text-center md:text-left"
+        >
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
             Spin to Win Your Discount!
           </h2>
@@ -84,7 +124,7 @@ export default function WheelSpinComponent() {
             )}
             {isSpinning ? "Spinning..." : "Spin the Wheel"}
           </Button>
-        </div>
+        </motion.div>
         <div className="wheel-container relative">
           <div
             className="wheel"
@@ -163,6 +203,6 @@ export default function WheelSpinComponent() {
           </Card>
         </CouponModal>
       )}
-    </motion.div>
+    </div>
   );
 }

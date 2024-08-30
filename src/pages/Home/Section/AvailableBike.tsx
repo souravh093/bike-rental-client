@@ -16,8 +16,6 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { SkeletonCard } from "@/components/shared/LoaderCard";
 import { TBike } from "@/types/bike";
-import { useAppSelector } from "@/redux/hooks";
-import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/variant";
 
@@ -26,9 +24,6 @@ interface AvailableBikeProps {
 }
 
 const AvailableBike = ({ searchQuery }: AvailableBikeProps) => {
-  const user = useAppSelector(selectCurrentUser);
-
-  const role = user ? user.role : null;
   const [currentPage] = useState(1);
   const [params] = useState<TQueryParam[]>([
     { name: "isAvailable", value: true },
@@ -118,8 +113,8 @@ const AvailableBike = ({ searchQuery }: AvailableBikeProps) => {
                   </CardContent>
                   <Separator />
                   <CardFooter className="flex items-center justify-end mt-4">
-                    <Button disabled={role !== "user"}>
-                      <Link to={`/dashboard/bike-details/${_id}`}>
+                    <Button>
+                      <Link to={`/bike-details-client/${_id}`}>
                         View Details
                       </Link>
                     </Button>

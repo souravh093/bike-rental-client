@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Bike, Tag, IndianRupee } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -13,9 +13,14 @@ import {
   useUpdateWithPaymentMutation,
 } from "@/redux/features/book/bookApi";
 import { toast } from "@/components/ui/use-toast";
-import { useGetAllCouponsQuery } from "@/redux/features/coupon/couponApi";
+import {
+  useGetAllCouponsQuery,
+  useGetCopyCouponQuery,
+} from "@/redux/features/coupon/couponApi";
 
 export default function PaymentBooking() {
+  const { data: copyCoupon } = useGetCopyCouponQuery(undefined);
+  console.log(copyCoupon);
   const location = useLocation();
   const { id, startTime, paidStatus, totalPrice, bookingId } =
     location.state || {};
@@ -33,6 +38,12 @@ export default function PaymentBooking() {
   const [updateWithPayment, { isLoading: paymentLoading }] =
     useUpdateWithPaymentMutation();
 
+  useEffect(() => {
+    if (copyCoupon?.data?.coupon) {
+      setCouponCode(copyCoupon.data.coupon);
+    }
+  }, [copyCoupon]);
+
   if (isLoading) {
     return <Loader />;
   }
@@ -46,6 +57,9 @@ export default function PaymentBooking() {
   };
 
   const totalPrices = totalPrice - Number(discount.toFixed(0));
+
+  console.log(couponCode, "couponCode");
+  console.log(copyCoupon?.data?.coupon, "copyCoupon");
 
   const handleCouponApply = () => {
     const matchedCoupon = coupons.find(
@@ -141,7 +155,9 @@ export default function PaymentBooking() {
                     <Input
                       type="text"
                       placeholder="Enter coupon code"
-                      value={couponCode}
+                      defaultValue={
+                        copyCoupon?.data?.coupon && copyCoupon?.data?.coupon
+                      }
                       onChange={(e) => setCouponCode(e.target.value)}
                       className="bg-white/50 border-gray-300 text-gray-800 placeholder-gray-400"
                     />

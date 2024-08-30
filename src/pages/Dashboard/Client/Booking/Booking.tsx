@@ -109,7 +109,7 @@ export default function Booking() {
                           {paidStatus && "Pending"}
                         </span>
                       </TableCell>
-                      <TableCell>{totalCost}</TableCell>
+                      <TableCell>{totalCost} BDT</TableCell>
                       <TableCell className="flex items-center gap-2">
                         <Button
                           className="bg-green-500 px-8"

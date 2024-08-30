@@ -32,6 +32,19 @@ const couponApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Coupon"],
     }),
+    upsertCopyCoupon: builder.mutation({
+      query: (coupon) => ({
+        url: `/copy-coupon`,
+        method: "PUT",
+        body: coupon,
+      }),
+    }),
+    getCopyCoupon: builder.query({
+      query: () => ({
+        url: `/copy-coupon`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -40,4 +53,6 @@ export const {
   useUpdateCouponMutation,
   useDeleteCouponMutation,
   useGetAllCouponsQuery,
+  useUpsertCopyCouponMutation,
+  useGetCopyCouponQuery,
 } = couponApi;

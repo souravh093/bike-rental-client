@@ -52,6 +52,7 @@ export default function ContactUs() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values)
     setIsSubmitting(true);
     // Simulate API call
     setTimeout(() => {
@@ -65,17 +66,24 @@ export default function ContactUs() {
   }
 
   return (
-    <motion.div
-      variants={fadeIn("up", 0)}
-      initial="hidden"
-      whileInView={"show"}
-      viewport={{ once: false, amount: 0.7 }}
-      className="py-20 px-4 bg-gradient-to-br from-background to-muted"
-    >
+    <div className="py-20 px-4 bg-gradient-to-br from-background to-muted">
       <div className="container mx-auto max-w-6xl">
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl mb-10 text-center">
-          Contact Us
-        </h2>
+        <motion.div
+          variants={fadeIn("left", 0)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.7 }}
+          className="flex flex-col justify-center items-center mb-10 gap-2"
+        >
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center">
+            Contact Us
+          </h2>
+          <p className="max-w-2xl text-center">
+            Have a question or need help with your rental? We're here to help!
+            Fill out the form below and we'll get back to you as soon as
+            possible.
+          </p>
+        </motion.div>
         <div className="grid md:grid-cols-2 gap-10">
           <Card className="md:order-2">
             <CardHeader>
@@ -246,6 +254,6 @@ export default function ContactUs() {
           </Card>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
