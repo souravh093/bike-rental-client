@@ -12,6 +12,7 @@ import { toast } from "@/components/ui/use-toast";
 import { logout, setUser } from "../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
+  // baseUrl: "http://localhost:5000/api",
   baseUrl: "https://bike-booker.vercel.app/api",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {

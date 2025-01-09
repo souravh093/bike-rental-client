@@ -20,8 +20,9 @@ import {
 import { useCreateBikeMutation } from "@/redux/features/bike/bikeApi";
 import { toast } from "../ui/use-toast";
 import { useState } from "react";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 import { storage } from "@/firebase/firebase.config";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 
 interface CreateBikeFormProps {
@@ -47,7 +48,7 @@ const CreateBikeForm: React.FC<CreateBikeFormProps> = ({ setOpen }) => {
     setIsImageUploading(true);
 
     try {
-      const snapshot = await uploadBytes(storageRef, imageFile);
+    const snapshot = await uploadBytes(storageRef, imageFile);
       const downloadURL = await getDownloadURL(snapshot.ref);
       return downloadURL;
     } catch (error) {

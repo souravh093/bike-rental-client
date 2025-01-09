@@ -2,6 +2,7 @@ import AuthLayout from "@/layout/AuthLayout";
 import DashboardLayout from "@/layout/DashboardLayout";
 import RootLayout from "@/layout/RootLayout";
 import AboutUs from "@/pages/About/About";
+import AllBikes from "@/pages/AllBikes/AllBikes";
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
 import BikeDetailsClient from "@/pages/BikeDetailsClient/BikeDetailsClient";
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
         path: "/bike-details-client/:id",
         element: <BikeDetailsClient />,
       },
+      {
+        path: "/all-bikes",
+        element: <AllBikes />,
+      },
     ],
   },
   {
@@ -72,7 +77,7 @@ const router = createBrowserRouter([
       // Admin Dashboard
       {
         index: true,
-        element: <DashboardHome />
+        element: <DashboardHome />,
       },
       {
         path: "profile",

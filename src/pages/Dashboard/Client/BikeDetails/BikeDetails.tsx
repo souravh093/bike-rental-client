@@ -16,8 +16,18 @@ const BikeDetails = () => {
     return <Loader />;
   }
 
-  const { _id, name, pricePerHour, model, brand, year, description, image, cc, isAvailable } =
-    bikeDetails.data;
+  const {
+    _id,
+    name,
+    pricePerHour,
+    model,
+    brand,
+    year,
+    description,
+    image,
+    cc,
+    isAvailable,
+  } = bikeDetails.data;
   return (
     <div>
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12">
@@ -45,9 +55,6 @@ const BikeDetails = () => {
                 </Badge>
               </p>
             </div>
-            <div className="prose">
-              <p>{description}</p>
-            </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <p className="text-muted-foreground">CC</p>
@@ -68,6 +75,11 @@ const BikeDetails = () => {
             </div>
             <CreateBookingModal role={role} id={_id} />
           </div>
+        </div>
+
+        <div>
+          <h2 className="text-2xl font-bold mt-8">Description</h2>
+          <p className="text-muted-foreground mt-2">{description}</p>
         </div>
       </div>
     </div>

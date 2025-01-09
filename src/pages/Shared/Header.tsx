@@ -42,14 +42,14 @@ const Header = () => {
               Home
             </NavLink>
             <NavLink
-              to={"/about"}
+              to={"/all-bikes"}
               className={({ isActive }) =>
                 `font-semibold text-sm lg:text-base hover:text-gray-700 transition duration-75 ${
                   isActive ? "border-b border-yellow-500" : ""
                 }`
               }
             >
-              About us
+              All Bikes
             </NavLink>
             <NavLink
               to={"/comparison"}
@@ -60,6 +60,16 @@ const Header = () => {
               }
             >
               Comparison
+            </NavLink>
+            <NavLink
+              to={"/about"}
+              className={({ isActive }) =>
+                `font-semibold text-sm lg:text-base hover:text-gray-700 transition duration-75 ${
+                  isActive ? "border-b border-yellow-500" : ""
+                }`
+              }
+            >
+              About us
             </NavLink>
           </div>
           <div className="flex items-center gap-4">

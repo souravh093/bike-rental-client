@@ -4,6 +4,8 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { getStorage } from "firebase/storage";
 // Your web app's Firebase configuration
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyAv9ofsNZkBkdqCynHmQh9LYHJaIzS9i4w",
   authDomain: "bike-booker-f4a7f.firebaseapp.com",

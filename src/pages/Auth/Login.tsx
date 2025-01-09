@@ -37,7 +37,6 @@ const Login = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const res = await login(data).unwrap();
 
-
     const user = verifyToken(res.token);
 
     try {
@@ -52,8 +51,20 @@ const Login = () => {
       navigate("/dashboard");
     } catch (error) {
       console.log(error);
-      toast({ title: "Something went wrong" }); 
+      toast({ title: "Something went wrong" });
     }
+  };
+
+  // Default credentials
+  const defaultCredentials = {
+    user: { email: "user@gmail.com", password: "password" },
+    admin: { email: "admin@gmail.com", password: "password" },
+  };
+
+  const handleAutoFill = (role: "user" | "admin") => {
+    const credentials = defaultCredentials[role];
+    form.setValue("email", credentials.email);
+    form.setValue("password", credentials.password);
   };
 
   return (
@@ -99,6 +110,15 @@ const Login = () => {
             Signup now
           </Link>
         </h3>
+
+        <div className="flex justify-center gap-4 mt-4">
+          <Button type="button" onClick={() => handleAutoFill("user")}>
+            Autofill User
+          </Button>
+          <Button type="button" onClick={() => handleAutoFill("admin")}>
+            Autofill Admin
+          </Button>
+        </div>
       </div>
     </div>
   );
