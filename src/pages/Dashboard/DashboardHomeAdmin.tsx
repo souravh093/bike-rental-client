@@ -7,7 +7,7 @@ import { RentalTrendChart } from "./Admin/RentalTrendChart/RentalTrendChart";
 import { RecentRentalsTable } from "./Admin/RecentRentalTable/RecentRentalTable";
 import { useGetBikesQuery } from "@/redux/features/bike/bikeApi";
 
-const DashboardHome = () => {
+const DashboardHomeAdmin = () => {
   const { data: bikes } = useGetBikesQuery(undefined);
   const { data: users } = useGetAllUsersQuery(undefined);
   return (
@@ -87,4 +87,4 @@ const DashboardHome = () => {
   );
 };
 
-export default DashboardHome;
+export default DashboardHomeAdmin;
