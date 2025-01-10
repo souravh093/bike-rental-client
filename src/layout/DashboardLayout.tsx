@@ -1,4 +1,4 @@
-import { CircleUser, Menu, Package2 } from "lucide-react";
+import { ChevronRight, CircleUser, Menu, Package2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -24,6 +24,12 @@ const DashboardLayout = () => {
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const pathSegments = pathname.split("/").filter(Boolean);
+  const uuidRegex =
+    /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+  if (uuidRegex.test(pathSegments[pathSegments.length - 1])) {
+    pathSegments.pop();
+  }
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
@@ -66,7 +72,9 @@ const DashboardLayout = () => {
                   className="flex items-center gap-2 text-lg font-semibold"
                 >
                   <Package2 className="h-6 w-6" />
-                  <span className="sr-only">Acme Inc</span>
+                  <span className="sr-only">
+                    Bike Booker
+                  </span>
                 </Link>
                 {role === "admin" ? <AdminSidebar /> : <ClientSidebar />}
               </nav>
@@ -94,9 +102,20 @@ const DashboardLayout = () => {
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
           <div className="flex items-center">
-            <h1 className="text-lg font-semibold md:text-2xl capitalize">
-              {pathname}
-            </h1>
+            <ol className="list-reset flex items-center bg-gray-200 dark:bg-gray-900  px-2 py-1 rounded-sm">
+              {pathSegments.map((segment, index) => {
+                return (
+                  <li key={index} className="flex items-center">
+                    <span className="text-gray-600 dark:text-gray-200 hover:text-gray-800">
+                      {segment.charAt(0).toUpperCase() + segment.slice(1)}
+                    </span>
+                    {index < pathSegments.length - 1 && (
+                      <ChevronRight className="mx-2 text-gray-400" />
+                    )}
+                  </li>
+                );
+              })}
+            </ol>
           </div>
           <div
             className="flex-1 p-5 rounded-lg border border-dashed shadow-sm"

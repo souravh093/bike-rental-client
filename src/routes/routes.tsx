@@ -16,7 +16,7 @@ import BikeDetails from "@/pages/Dashboard/Client/BikeDetails/BikeDetails";
 import Booking from "@/pages/Dashboard/Client/Booking/Booking";
 import ClientBikeManagement from "@/pages/Dashboard/Client/ClientBikeManagement/ClientBikeManagement";
 import PaymentBooking from "@/pages/Dashboard/Client/PaymentBooking/PaymentBooking";
-import DashboardHome from "@/pages/Dashboard/DashboardHome";
+import DashboardHome from "@/pages/Dashboard/DashboardHomeAdmin";
 import Error from "@/pages/Error/Error";
 import Home from "@/pages/Home/Home";
 import PrivateRoute from "@/private/PrivateRoute";

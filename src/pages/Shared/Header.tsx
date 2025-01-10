@@ -91,6 +91,9 @@ const Header = () => {
                   <DropdownMenuItem>
                     <Link to={"/dashboard"}>Dashboard</Link>
                   </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link to={"/dashboard/profile"}>Profile</Link>
+                  </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout}>
                     Logout
