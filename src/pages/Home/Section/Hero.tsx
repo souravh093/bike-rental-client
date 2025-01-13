@@ -24,7 +24,7 @@ const Hero = ({ onSearch }: HeroProps) => {
   };
 
   return (
-    <div className="relative flex items-center justify-center min-h-[calc(100vh-80px)] bg-gray-900">
+    <div className="relative flex items-center justify-center min-h-[calc(100vh-260px)] bg-gray-900">
       <video
         className="absolute inset-0 object-cover w-full h-full"
         src={video}
