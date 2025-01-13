@@ -11,8 +11,8 @@ const DashboardHomeAdmin = () => {
   const { data: bikes } = useGetBikesQuery(undefined);
   const { data: users } = useGetAllUsersQuery(undefined);
   return (
-    <main className="p-8">
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
+    <main className="p-4 md:p-8">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-8">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Bikes</CardTitle>
@@ -51,9 +51,7 @@ const DashboardHomeAdmin = () => {
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Total Coupon
-            </CardTitle>
+            <CardTitle className="text-sm font-medium">Total Coupon</CardTitle>
             <Bike className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -66,7 +64,7 @@ const DashboardHomeAdmin = () => {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7 mb-8">
-        <Card className="col-span-4">
+        <Card className="col-span-7 lg:col-span-4">
           <CardHeader>
             <CardTitle>Rental Trends</CardTitle>
           </CardHeader>
@@ -74,7 +72,7 @@ const DashboardHomeAdmin = () => {
             <RentalTrendChart />
           </CardContent>
         </Card>
-        <Card className="col-span-3">
+        <Card className="col-span-7 lg:col-span-3">
           <CardHeader>
             <CardTitle>Recent Rentals</CardTitle>
           </CardHeader>

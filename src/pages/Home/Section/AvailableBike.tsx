@@ -9,15 +9,14 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Bike, CalendarRange, Cog, Component } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { SkeletonCard } from "@/components/shared/LoaderCard";
 import { TBike } from "@/types/bike";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/variant";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface AvailableBikeProps {
   searchQuery: string;
@@ -56,26 +55,52 @@ const AvailableBike = ({ searchQuery }: AvailableBikeProps) => {
         </motion.div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {isLoading ? (
-            <SkeletonCard />
+            Array.from({ length: 8 }).map((_, index) => (
+              <Card key={index} className="flex flex-col h-full">
+                <CardHeader className="mb-5">
+                  <Skeleton className="h-4 w-[250px]" />
+                  <Separator className="my-2" />
+                  <Skeleton className="h-[176px] w-full rounded-md" />
+                </CardHeader>
+                <CardContent className="flex-grow">
+                  <div className="grid grid-cols-2 gap-4">
+                    {Array.from({ length: 4 }).map((_, i) => (
+                      <div key={i} className="flex gap-2">
+                        <Skeleton className="h-6 w-6 rounded-full" />
+                        <div>
+                          <Skeleton className="h-4 w-[100px]" />
+                          <Skeleton className="h-3 w-[70px] mt-1" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+                <Separator />
+                <CardFooter className="flex items-center justify-end mt-4">
+                  <Skeleton className="h-10 w-[100px]" />
+                </CardFooter>
+              </Card>
+            ))
           ) : bikeData?.data.length < 1 ? (
             <span className="text-red-500">No bike found</span>
           ) : (
             bikeData?.data.map(
               ({ image, brand, _id, name, model, cc, year }: TBike) => (
-                <Card key={_id}>
+                <Card key={_id} className="flex flex-col h-full">
+                  {/* Card Header */}
                   <CardHeader className="mb-5">
                     <h1 className="text-xl font-bold capitalize">{name}</h1>
                     <Separator />
-                    <AspectRatio ratio={16 / 9}>
-                      <img
-                        src={image}
-                        alt="Image"
-                        className="rounded-md object-cover"
-                      />
-                    </AspectRatio>
+                    <img
+                      src={image}
+                      alt="Bike Image"
+                      className="rounded-md object-cover h-44 w-full"
+                    />
                   </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-2 justify-between">
+
+                  {/* Card Content */}
+                  <CardContent className="flex-grow">
+                    <div className="grid grid-cols-2 gap-4">
                       <div className="flex flex-col gap-3">
                         <div className="flex gap-2">
                           <Bike className="w-6 h-6 text-yellow-500" />
@@ -87,30 +112,31 @@ const AvailableBike = ({ searchQuery }: AvailableBikeProps) => {
                         <div className="flex gap-2">
                           <Cog className="w-6 h-6 text-yellow-500" />
                           <div>
-                            <h3 className=" font-bold uppercase">{cc}</h3>
+                            <h3 className="font-bold uppercase">{cc}</h3>
                             <span>CC</span>
                           </div>
                         </div>
                       </div>
-
                       <div className="flex flex-col gap-3">
                         <div className="flex gap-2">
                           <Component className="w-6 h-6 text-yellow-500" />
                           <div>
-                            <h3 className=" font-bold uppercase">{model}</h3>
+                            <h3 className="font-bold uppercase">{model}</h3>
                             <span>Model</span>
                           </div>
                         </div>
                         <div className="flex gap-2">
                           <CalendarRange className="w-6 h-6 text-yellow-500" />
                           <div>
-                            <h3 className=" font-bold uppercase">{year}</h3>
+                            <h3 className="font-bold uppercase">{year}</h3>
                             <span>Year</span>
                           </div>
                         </div>
                       </div>
                     </div>
                   </CardContent>
+
+                  {/* Card Footer */}
                   <Separator />
                   <CardFooter className="flex items-center justify-end mt-4">
                     <Button>

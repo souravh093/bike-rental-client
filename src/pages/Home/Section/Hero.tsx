@@ -1,3 +1,6 @@
+"use client";
+
+import { useRef } from "react";
 import video from "@/assets/hero.mp4";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,13 +13,18 @@ interface HeroProps {
 }
 
 const Hero = ({ onSearch }: HeroProps) => {
+  const formRef = useRef<HTMLFormElement>(null);
+
   const handleSearchSubmit: SubmitHandler<FieldValues> = (e) => {
     e.preventDefault();
-    const search = e.target.search.value;
-    onSearch(search);
+    const search = formRef.current?.search.value;
+    if (search) {
+      onSearch(search);
+    }
   };
+
   return (
-    <div className="relative flex items-center justify-center h-[calc(100vh-300px)] bg-gray-900">
+    <div className="relative flex items-center justify-center min-h-[calc(100vh-80px)] bg-gray-900">
       <video
         className="absolute inset-0 object-cover w-full h-full"
         src={video}
@@ -28,17 +36,18 @@ const Hero = ({ onSearch }: HeroProps) => {
 
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
-      <div className="relative z-10 text-center text-white">
+      <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto">
         <motion.div
           variants={fadeIn("right", 0)}
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: false, amount: 0.7 }}
+          className="mb-8 sm:mb-12"
         >
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
             Explore the City on Two Wheels
           </h1>
-          <p className="text-xl sm:text-2xl mb-8">
+          <p className="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 max-w-3xl mx-auto">
             Rent a bike and discover the beauty of urban cycling
           </p>
         </motion.div>
@@ -47,19 +56,25 @@ const Hero = ({ onSearch }: HeroProps) => {
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: false, amount: 0.7 }}
-          className="border p-4 rounded-lg shadow-lg max-w-md sm:max-w-2xl lg:max-w-3xl flex items-center justify-center mx-auto gap-5"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
         >
-          <Button size="lg" className="bg-yellow-500">
+          <Button size="lg" className="bg-yellow-500 w-full sm:w-auto">
             Start Your Adventure
           </Button>
-          <form onSubmit={handleSearchSubmit} className="flex gap-2">
+          <form
+            ref={formRef}
+            onSubmit={handleSearchSubmit}
+            className="flex w-full sm:w-auto gap-2"
+          >
             <Input
               name="search"
               type="text"
               placeholder="Search bike..."
-              className="lg:w-96 w-32 px-4 py-2 text-black dark:text-white outline-none rounded-lg transition duration-300 ease-in-out transform focus:scale-105"
+              className="w-full sm:w-64 md:w-80 lg:w-96 px-4 py-2 text-black dark:text-white outline-none rounded-lg transition duration-300 ease-in-out transform focus:scale-105"
             />
-            <Button type="submit">Search</Button>
+            <Button type="submit" className="whitespace-nowrap">
+              Search
+            </Button>
           </form>
         </motion.div>
       </div>
