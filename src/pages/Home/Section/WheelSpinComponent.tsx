@@ -99,7 +99,7 @@ export default function WheelSpinComponent() {
 
   return (
     <div className="flex flex-col items-center justify-center py-24 bg-white dark:bg-gray-900 p-4">
-      <Tabs defaultValue="current" className="w-full max-w-7xl mx-auto">
+      <Tabs defaultValue="current" className="w-full max-w-[1400px] mx-auto">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="current">Current Offers</TabsTrigger>
           <TabsTrigger value="howto">How to Apply</TabsTrigger>

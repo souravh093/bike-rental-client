@@ -22,8 +22,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="container mx-auto py-10">
-      <h1 className="text-4xl font-bold mb-10 text-center">My Profile</h1>
+    <div className="py-10">
       <ProfileCard 
         userData={userData.data} 
         onEdit={() => setIsEditModalOpen(true)} 

@@ -26,6 +26,7 @@ import {
 import { MapPin, Phone, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/variant";
+import Container from "@/components/shared/Container";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -66,8 +67,8 @@ export default function ContactUs() {
   }
 
   return (
-    <div className="py-20 px-4 bg-gradient-to-br from-background to-muted">
-      <div className="container mx-auto max-w-6xl">
+    <div className="py-20 bg-gradient-to-br from-background to-muted">
+      <Container>
         <motion.div
           variants={fadeIn("left", 0)}
           initial="hidden"
@@ -253,7 +254,7 @@ export default function ContactUs() {
             </CardContent>
           </Card>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }
